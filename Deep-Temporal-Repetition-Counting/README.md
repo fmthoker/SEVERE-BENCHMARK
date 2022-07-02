@@ -49,7 +49,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python main.py   --batch_size 32  --result_path res
 python main.py --no_train --resume_path = path to the finetuned_checkpoint with best validation accuracy
 
 ### Acknowledgement
-## Our code is based on the official implementation of CVPR2020 paper: ["Context-aware and Scale-insensitive Temporal Repetition Counting"](https://github.com/Xiaodomgdomg/Deep-Temporal-Repetition-Counting). If you use this code please cite their work too as following:
+# Our code is based on the official implementation of CVPR2020 paper: ["Context-aware and Scale-insensitive Temporal Repetition Counting"](https://github.com/Xiaodomgdomg/Deep-Temporal-Repetition-Counting). If you use this code please cite their work too as following:
 
 ```bibtex
  @InProceedings{Zhang_2020_CVPR,
