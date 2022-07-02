@@ -1,0 +1,11 @@
+*/*__pycache__*
+*/*.swp
+*/*.pyc
+ssl_benchmark/checkpoints/*
+ssl_benchmark/logs_camera_ready/
+ssl_benchmark/out_*
+*/*/*.pyc
+*/*/*/*.pyc
+*/*/*/*/*.pyc
+*/*/*/*/*/*.pyc
+checkpoints_pretraining/*/*
