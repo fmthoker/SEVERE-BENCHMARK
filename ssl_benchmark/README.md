@@ -65,28 +65,24 @@ The datasets can be downloaded from the following links:
 └── ...
 ```
 
-### Generic Training template
-For finetuning any pretrained models run as following:
 
+
+## Domain Shift 
+### Training 
 ```bash
-# template for training  
 python finetune.py path_to_dataset_config_file  --pretext-model-name  pretrained_model_name --pretext-model-path path_to_pretrained_checkpoint  --finetune-ckpt-path path_to_save_finetuned_checkpoints  
 # example training pretraned  gdt model on something-something-v2 
 python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/ --seed 100
-
+#For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  scripts_domain_shift/  folder.
 ```
 ### Testing
-
 ```bash
 # After finetuning, set test_only flag to true in the respective config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
-### Domain Shift 
-For finetuning pretrained models on something_something_v2 and gym_99 use training scripts in  scripts_domain_shift/  folder.
-```bash
+## Sample size 
 
-```
-#
+## Fine-gym Granularities 
 
 
 ### Acknowledgements
