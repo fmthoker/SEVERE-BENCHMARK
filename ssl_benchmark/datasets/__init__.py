@@ -10,7 +10,8 @@ from .kinetics import Kinetics
 from .ucf import UCF
 from .hmdb import HMDB
 from .gym_99 import GYM99
-from .gym_event import GYM_event
+from .gym_event_vault import GYM_event_vault
+from .gym_event_floor_exercise import GYM_event_floor_exercise
 from .gym_set_FX_S1 import GYM_set_FX_S1
 from .gym_set_UB_S1 import GYM_set_UB_S1
 from .gym_288 import GYM288

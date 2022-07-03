@@ -54,7 +54,7 @@ optimizer:
   warmup_classifier: false
   lr:
     name: "multistep"
-    base_lr: 0.0001
+    base_lr: 0.001
     gamma: 0.3
     milestones: [6, 10, 14]
 

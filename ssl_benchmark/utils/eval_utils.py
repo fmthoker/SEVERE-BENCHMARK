@@ -110,8 +110,10 @@ def build_dataloader(db_cfg, split_cfg, fold, num_workers, distributed):
         dataset = datasets.GYM99
     elif db_cfg['name'] == 'gym288':
         dataset = datasets.GYM288
-    elif db_cfg['name'] == 'gym_event':
-        dataset = datasets.GYM_event
+    elif db_cfg['name'] == 'gym_event_vault':
+        dataset = datasets.GYM_event_vault
+    elif db_cfg['name'] == 'gym_event_floor_exercise':
+        dataset = datasets.GYM_event_floor_exercise
     elif db_cfg['name'] == 'gym_set_fx_s1':
         dataset = datasets.GYM_set_FX_S1
     elif db_cfg['name'] == 'gym_set_ub_s1':

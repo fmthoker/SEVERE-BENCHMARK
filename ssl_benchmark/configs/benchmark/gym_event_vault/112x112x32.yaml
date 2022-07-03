@@ -2,18 +2,18 @@ required_devices: 8
 resume: false
 
 no_test: false
-test_only: true
+test_only: false
 debug: false
 seed: 0
 distributed: false
 test_freq: 5
-num_workers: 20
+num_workers: 16
 
 benchmark:
-  name: "gym_event-from_scratch_112X112x32"
+  name: "gym_event_vault-full_finetune_112X112x32"
 
 dataset:
-  name: "gym_event"
+  name: "gym_event_vault"
   fold: 1
   batch_size: 32
   clip_duration: 2.0
@@ -21,6 +21,9 @@ dataset:
   crop_size: 112
   transform: "msc+color"
   min_area: 0.08
+  normalize: true
+  switch_channels: false
+  num_of_examples: 0
   color: [0.4, 0.4, 0.4, 0.2]
   train:
     split: "trainlist{fold:02d}"

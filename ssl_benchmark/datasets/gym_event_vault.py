@@ -12,7 +12,7 @@ DATA_PATH = '/ssdstore/fmthoker/gym/subactions'
 ANNO_PATH = '/ssdstore/fmthoker/gym/annotations'
 
 
-class GYM_event(VideoDataset):
+class GYM_event_vault(VideoDataset):
     def __init__(self, subset,
                  video_clip_duration=0.5,
                  return_video=True,
@@ -23,7 +23,7 @@ class GYM_event(VideoDataset):
                  max_offsync_augm=0,
                  mode='clip',
                  clips_per_video=20,
-                 num_of_examples =  1000
+                 num_of_examples =  0
                  ):
 
         assert return_audio is False
@@ -31,8 +31,7 @@ class GYM_event(VideoDataset):
         self.root = DATA_PATH
         self.subset = subset
 
-        action_classes_to_include = [0,1,2,3,4,5] # event valut
-        action_classes_to_include = list(range(6,41)) # event floor exercise
+        action_classes_to_include = [0,1,2,3,4,5] # All actions from event vault
         filenames = []
         labels = []
         if 'train' in subset:
@@ -40,10 +39,7 @@ class GYM_event(VideoDataset):
                for ln in open(f'{ANNO_PATH}/gym99_train.txt'):
                       file_name, label = ln.strip().split()[0][0:-3]+'avi',int(ln.strip().split()[1])
                       if os.path.isfile(DATA_PATH+'/'+file_name):
-                              #print(file_name,label)
                               if label in action_classes_to_include:
-                                      if len(action_classes_to_include) == 35:
-                                              label = label - 6 # off set labels to start from 0
                                       labels.append(label)
                                       filenames.append(file_name)
                               else:
@@ -66,7 +62,7 @@ class GYM_event(VideoDataset):
         #labels   =  labels[0:1000]
         self.num_videos = len(filenames)
 
-        super(GYM_event, self).__init__(
+        super(GYM_event_vault, self).__init__(
             return_video=return_video,
             video_root=DATA_PATH,
             video_clip_duration=video_clip_duration,

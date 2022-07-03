@@ -21,9 +21,9 @@ dataset:
   crop_size: 112
   transform: "msc+color"
   min_area: 0.08
-  switch_channels: false
+  switch_channels: true
   num_of_examples: 0
-  normalize: true
+  normalize: false
   color: [0.4, 0.4, 0.4, 0.2]
   train:
     split: "trainlist{fold:02d}"

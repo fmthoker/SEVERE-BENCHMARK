@@ -76,16 +76,20 @@ python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model
 ```
 ### Testing
 ```bash
-# After finetuning, set test_only flag to true in the respective config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
+# After finetuning, set test_only flag to true in the  config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
 ## Sample size 
 * For finetuning pretrained models with different sample sizes use training scripts in  ./scripts_sample_sizes
 ```bash
+
+# Training
 # Example finetuning pretrained  gdt model on 1000 ucf101 examples  
 python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --seed 100
 # Note, set flag 'num_of_examples: to N'in the corresponding config file (e.g configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml) to use N samples.
-#  
+
+# Testing,  set test_only flag to true in the  config file and run
+python test.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --seed 100
 ```
 
 ## Fine-gym Granularities 
