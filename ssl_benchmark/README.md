@@ -69,9 +69,9 @@ The datasets can be downloaded from the following links:
 
 ## Domain Shift 
 ### Training 
-* For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  scripts_domain_shift/  folder.
+* For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  ./scripts_domain_shift/
 ```bash
-# example training pretrained  gdt model on something-something-v2 
+# Example finetuning pretrained  gdt model on something-something-v2 
 python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/ --seed 100
 ```
 ### Testing
@@ -80,11 +80,12 @@ python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
 ## Sample size 
-* For finetuning pretrained models with different sample sizes use use training scripts in  scripts_sample_sizes  folder.
+* For finetuning pretrained models with different sample sizes use training scripts in  ./scripts_sample_sizes
 ```bash
-# example training pretrained  gdt model on 1000 ucf101 examples  
+# Example finetuning pretrained  gdt model on 1000 ucf101 examples  
 python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --seed 100
 # Note, set flag 'num_of_examples: to N'in the corresponding config file (e.g configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml) to use N samples.
+#  
 ```
 
 ## Fine-gym Granularities 
