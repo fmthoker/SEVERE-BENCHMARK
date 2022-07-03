@@ -45,8 +45,7 @@ class NTU(VideoDataset):
 
 
         if 'train' in subset and num_of_examples!=0:
-                  seed = 99999
-                  filenames, labels = get_subset_data(filenames,labels,num_of_examples,seed)
+                  filenames, labels = get_subset_data(filenames,labels,num_of_examples)
 
         self.num_classes = len(self.classes)
         self.num_videos = len(filenames)

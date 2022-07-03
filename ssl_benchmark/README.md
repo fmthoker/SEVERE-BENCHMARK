@@ -1,0 +1,86 @@
+## Evaluating self-supervised video representation models for domain shift, sample sizes and fine-grained actions 
+## Requirements
+
+* pip install -r requirements.txt 
+
+## Pretrained Models
+* Please download our pretrained models  [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC).
+```bash
+mv checkpoints_pretraining/ ..
+```
+
+## Dataset Preparation
+The datasets files (images, labels, splits etc.) can be downloaded from the following links:
+
+[UCF101 ](http://crcv.ucf.edu/data/UCF101.php)
+[Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something),
+[NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/),
+For [Fine-Gym]() we follow the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to download and extract videos. (you can contact us in case of any issues)
+
+The expected directory hierarchy is as follow:
+```
+├── data
+│   ├──ucf101
+│   │   ├── ucfTrainTestlist
+│   │   │   ├── classInd.txt
+│   │   │   ├── testlist01.txt
+│   │   │   ├── trainlist01.txt
+│   │   │   └── ...
+│   │   └── UCF-101
+│   │       ├── ApplyEyeMakeup
+│   │       │   └── *.avi
+│   │       └── ...
+│   ├──gym
+│   │   ├── annotations
+│   │   │   ├── gym99_train.txt
+│   │   │   ├── gym99_val.txt 
+│   │   │   ├── gym288_train.txt
+│   │   │   ├── gym288_val.txt
+│   │   │   └──
+│   │   └── videos
+│   │       ├── *.avi
+│   │       │   
+│   │       └── ...
+│   │──smth-smth-v2
+│   │   ├── 20bn-something-something-v2
+│   │   │   └── *.avi
+│   │   └── something-something-v2-annotations
+│   │       ├── something-something-v2-labels.json
+│   │       ├── something-something-v2-test.json
+│   │       ├── something-something-v2-train.json
+│   │       └── something-something-v2-validation.json
+│   ├──ntu60
+│   │   ├── ntu_60_cross_subject_TrainTestlist
+│   │   │   ├── classInd.txt
+│   │   │   ├── testlist01.txt
+│   │   │   ├── trainlist01.txt
+│   │   │   └── ...
+│   │   └── videos
+│   │       ├── brushing_hair
+│   │       │   └── *.avi
+│   │       ├── brushing_teeth
+│   │       │   └── *.avi
+│   │       └── ...
+└── ...
+```
+
+### Training
+For finetuning pretrained models run as following:
+
+```bash
+# template for training  
+python finetune.py path_to_dataset_config_file  --pretext-model-name  pretrained_model_name --pretext-model-path path_to_pretrained_checkpoint  --finetune-ckpt-path path_to_save_finetuned_checkpoints  
+# example training pretraned  gdt model on something-something-v2 
+python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/ --seed 100
+
+```
+### Testing
+
+```bash
+# After finetuning, set test_only flag to true in the respective config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
+python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
+```
+
+
+### Acknowledgements
+ We use parts of  code from : [Audio-Visual Instance Discrimination with Cross-Modal Agreement](https://github.com/facebookresearch/AVID-CMA) for buliding this repo. 

@@ -9,7 +9,7 @@ from .audioset import AudioSet
 from .kinetics import Kinetics
 from .ucf import UCF
 from .hmdb import HMDB
-from .gym import GYM99
+from .gym_99 import GYM99
 from .gym_event import GYM_event
 from .gym_set_FX_S1 import GYM_set_FX_S1
 from .gym_set_UB_S1 import GYM_set_UB_S1
