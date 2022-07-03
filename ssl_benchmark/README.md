@@ -13,8 +13,8 @@ mv checkpoints_pretraining/ ..
 The datasets can be downloaded from the following links:
 
 * [UCF101 ](http://crcv.ucf.edu/data/UCF101.php)
-* [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something),
-* [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/),
+* [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something)
+* [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
 * For [Fine-Gym]() we follow the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to download and extract videos. (you can contact us in case of any issues)
 
 * We provide the annoations for each dataset in the ./data/ directory:
