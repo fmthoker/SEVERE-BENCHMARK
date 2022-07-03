@@ -17,7 +17,7 @@ The datasets can be downloaded from the following links:
 * [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
 * For [Fine-Gym]() we follow the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to download and extract videos. (you can contact us in case of any issues)
 
-* We provide the annoations for each dataset in the ./data/ directory:
+* We provide the annoations that we use for each dataset in the ./data/ directory:
 * The expected directory hierarchy is as follow:
 ```
 ├── data
@@ -65,8 +65,8 @@ The datasets can be downloaded from the following links:
 └── ...
 ```
 
-### Training
-For finetuning pretrained models run as following:
+### Generic Training template
+For finetuning any pretrained models run as following:
 
 ```bash
 # template for training  
@@ -81,6 +81,12 @@ python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model
 # After finetuning, set test_only flag to true in the respective config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
+### Domain Shift 
+For finetuning pretrained models on something_something_v2 and gym_99 use training scripts in  scripts_domain_shift/  folder.
+```bash
+
+```
+#
 
 
 ### Acknowledgements

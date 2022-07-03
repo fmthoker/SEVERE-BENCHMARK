@@ -15,7 +15,7 @@ python finetune.py configs/benchmark/gym99/112x112x32_tclr.yaml   --pretext-mode
 
 python finetune.py configs/benchmark/gym99/112x112x32.yaml   --pretext-model-name  ctp --pretext-model-path ../checkpoints_pretraining/ctp/snellius_r2p1d18_ctp_k400_epoch_90.pth --seed 100
 
-python finetune.py configs/benchmark/gym99/112x112x32.yaml   --pretext-model-name  supervised --pretext-model-path ../checkpoints_pretraining/full_supervision/r2plus1d_18-91a641e6.pth --seed 100
+python finetune.py configs/benchmark/gym99/112x112x32.yaml   --pretext-model-name  supervised --pretext-model-path ../checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth --seed 100
 
 python finetune.py configs/benchmark/gym99/112x112x32_avid.yaml   --pretext-model-name  avid_cma --pretext-model-path ../checkpoints_pretraining/avid_cma/avid_cma_ckpt-ep20.pth.tar --seed 100
 

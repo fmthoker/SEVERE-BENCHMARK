@@ -317,12 +317,14 @@ def load_backbone(backbone="r2plus1d_18", init_method="scratch", ckpt_path=None)
            backbone.layer4[0].downsample[0] = nn.Conv3d(256, 512,\
                         kernel_size = (1, 1, 1), stride = (1, 2, 2), bias=False)
     
-    print_update(f"Loading {init_method} checkpoint")
-    if init_method not in ["scratch", ]:
+    if init_method not in ["scratch", ] :
         state_dict = eval(f"load_{init_method.lower()}_checkpoint")(ckpt_path)
+        print_update(f"Loading {init_method} checkpoint")
         message = backbone.load_state_dict(state_dict, strict=False)
-    print("Checkpoint Path: {}".format(ckpt_path))
-    print("Checkpoint Message: {}".format(message))
+        print("Checkpoint Path: {}".format(ckpt_path))
+        print("Checkpoint Message: {}".format(message))
+    else:
+        print_update(f"Training from scratch")
 
     return backbone
 
