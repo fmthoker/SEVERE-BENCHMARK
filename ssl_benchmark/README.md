@@ -70,14 +70,14 @@ The datasets can be downloaded from the following links:
 
 
 ## Domain Shift 
-### Training 
 * For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  ./scripts_domain_shift/
 ```bash
+### Training 
 # Example finetuning pretrained  gdt model on something-something-v2 
 python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/ --seed 100
 ```
-### Testing
 ```bash
+### Testing
 # After finetuning, set test_only flag to true in the  config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
@@ -95,6 +95,19 @@ python test.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pre
 ```
 
 ## Fine-gym Granularities 
+* For finetuning pretrained models with different Fine-gym granularities use training scripts in  ./scripts_finegym_actions
+
+```bash
+# Training
+# Example finetuning pretrained  fully_supervised_kinetics model on set FX_S1  granularity
+
+python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --seed 100
+# Note, set flag 'num_of_examples: to N'in the corresponding config file (e.g configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml) to use N samples.
+# Note, set flag 'num_of_examples: to N'in the corresponding config file (e.g configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml) to use N samples.
+
+# Testing,  set test_only flag to true in the  config file and run
+python test.py configs/benchmark/gym_set_FX_S1/112x112x32.yaml   --pretext-model-name  supervised --pretext-model-path ../checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth 
+```
 
 
 ### Acknowledgements
