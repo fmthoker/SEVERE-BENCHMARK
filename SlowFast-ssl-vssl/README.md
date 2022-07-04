@@ -1,10 +1,9 @@
 
 # Experiments on AVA and Charades
 
-This sub-repo is based on Facebook's official [SlowFast repo](https://github.com/facebookresearch/SlowFast). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D backbone.
+This sub-repo is based on Facebook's official [SlowFast repo](https://github.com/facebookresearch/SlowFast). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D backbone for AVA and Charades datasets. On AVA, the task is fine-grained action detection. On Charades, the task is multi-label action classification.
 
-On AVA, the task is fine-grained action detection. On Charades, the task is multi-label action classification.
-
+For more details about more broader usage of the SlowFast code, please refer to the [Getting started](https://github.com/facebookresearch/SlowFast/blob/main/GETTING_STARTED.md) guide in the official repo. All credits and copyrights are reserved with the original repository authors.
 
 ## Setup
 
