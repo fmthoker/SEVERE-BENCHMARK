@@ -10,7 +10,7 @@ test_freq: 5
 num_workers: 20
 
 benchmark:
-  name: "gym288-from_scratch_112X112x32"
+  name: "gym288-full_finetune_112X112x32"
 
 dataset:
   name: "gym288"
