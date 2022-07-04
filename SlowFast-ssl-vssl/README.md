@@ -1,67 +1,127 @@
-# PySlowFast
 
-PySlowFast is an open source video understanding codebase from FAIR that provides state-of-the-art video classification models with efficient training. This repository includes implementations of the following methods:
+# Experiments on AVA and Charades
 
-- [SlowFast Networks for Video Recognition](https://arxiv.org/abs/1812.03982)
-- [Non-local Neural Networks](https://arxiv.org/abs/1711.07971)
-- [A Multigrid Method for Efficiently Training Video Models](https://arxiv.org/abs/1912.00998)
-- [X3D: Progressive Network Expansion for Efficient Video Recognition](https://arxiv.org/abs/2004.04730)
-- [Multiscale Vision Transformers](https://arxiv.org/abs/2104.11227.pdf)
+This sub-repo is based on Facebook's official [SlowFast repo](https://github.com/facebookresearch/SlowFast). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D backbone.
 
-<div align="center">
-  <img src="demo/ava_demo.gif" width="600px"/>
-</div>
+On AVA, the task is fine-grained action detection. On Charades, the task is multi-label action classification.
 
-## Introduction
 
-The goal of PySlowFast is to provide a high-performance, light-weight pytorch codebase provides state-of-the-art video backbones for video understanding research on different tasks (classification, detection, and etc). It is designed in order to support rapid implementation and evaluation of novel video research ideas. PySlowFast includes implementations of the following backbone network architectures:
+## Setup
 
-- SlowFast
-- Slow
-- C2D
-- I3D
-- Non-local Network
-- X3D
+* Create conda environment and install dependencies:
+    ```sh
+    bash setup/create_env.sh slowfast
+    ```
+    This will create and activate a conda environment called `slowfast`.
+    Please activate it for further steps.
+    ```sh
+    conda activate slowfast
+    ```
+* (Refer to the following sections for setting up datasets) Symlink the dataset folder. Suppose Charades and AVA datasets are stored inside `/path/to/datasets/`. Then, run the following from the repo:
+    ```sh
+    ln -s /path/to/datasets/ data
+    ```
+* Symlink the pre-trained models for initialization. Suppose all your VSSL pre-trained checkpoints are at `/path/to/checkpoints_pretraining`
+    ```sh
+    ls -s /path/to/checkpoints_pretraining/ checkpoints_pretraining
+    ```
 
-## Updates
- - We now support [Multiscale Vision Transformers](https://arxiv.org/abs/2104.11227.pdf) on Kinetics and ImageNet. See [`projects/mvit`](./projects/mvit/README.md) for more information.
- - We now support [PyTorchVideo](https://github.com/facebookresearch/pytorchvideo) models and datasets. See [`projects/pytorchvideo`](./projects/pytorchvideo/README.md) for more information.
- - We now support [X3D Models](https://arxiv.org/abs/2004.04730). See [`projects/x3d`](./projects/x3d/README.md) for more information.
- - We now support [Multigrid Training](https://arxiv.org/abs/1912.00998) for efficiently training video models. See [`projects/multigrid`](./projects/multigrid/README.md) for more information.
- - PySlowFast is released in conjunction with our [ICCV 2019 Tutorial](https://alexander-kirillov.github.io/tutorials/visual-recognition-iccv19/).
 
-## License
+### Data preparation for AVA
 
-PySlowFast is released under the [Apache 2.0 license](LICENSE).
+Overall, the data preparation for AVA takes about 20 hours.
 
-## Model Zoo and Baselines
+1. Symlink the data folder
+```sh
+cd /path/to/repo/
+mkdir -p data
 
-We provide a large set of baseline results and trained models available for download in the PySlowFast [Model Zoo](MODEL_ZOO.md).
+# example: /ssd/pbagad/datasets/AVA
+export ROOT_DATA_DIR=/path/to/where/you/want/to/store/AVA-dataset
 
-## Installation
-
-Please find installation instructions for PyTorch and PySlowFast in [INSTALL.md](INSTALL.md). You may follow the instructions in [DATASET.md](slowfast/datasets/DATASET.md) to prepare the datasets.
-
-## Quick Start
-
-Follow the example in [GETTING_STARTED.md](GETTING_STARTED.md) to start playing video models with PySlowFast.
-
-## Visualization Tools
-
-We offer a range of visualization tools for the train/eval/test processes, model analysis, and for running inference with trained model.
-More information at [Visualization Tools](VISUALIZATION_TOOLS.md).
-
-## Contributors
-PySlowFast is written and maintained by [Haoqi Fan](https://haoqifan.github.io/), [Yanghao Li](https://lyttonhao.github.io/), [Bo Xiong](https://www.cs.utexas.edu/~bxiong/), [Wan-Yen Lo](https://www.linkedin.com/in/wanyenlo/), [Christoph Feichtenhofer](https://feichtenhofer.github.io/).
-
-## Citing PySlowFast
-If you find PySlowFast useful in your research, please use the following BibTeX entry for citation.
-```BibTeX
-@misc{fan2020pyslowfast,
-  author =       {Haoqi Fan and Yanghao Li and Bo Xiong and Wan-Yen Lo and
-                  Christoph Feichtenhofer},
-  title =        {PySlowFast},
-  howpublished = {\url{https://github.com/facebookresearch/slowfast}},
-  year =         {2020}
-}
+# symlink
+ln -s $ROOT_DATA_DIR data/AVA/
 ```
+
+2. Download: This step takes about 3.5 hours.
+```sh
+cd scripts/prepare-ava/
+bash download_data.sh
+```
+
+3. Cut each video from its 15th to 30th minute: This step takes about 14 hours.
+```sh
+bash cut_videos.sh
+```
+
+4. Extract frames: This step takes about 1 hour.
+```sh
+bash extract_frames.sh
+```
+
+5. Download annotations: This step takes about 30 minutes.
+```sh
+bash download_annotations.sh
+```
+
+6. Setup exception videos that may have failed the first time. For me, there was this video `I8j6Xq2B5ys.mp4` that failed the first time. See `scripts/prepare-ava/exception.sh` to re-run the steps for such videos.
+
+### Data preparation for Charades
+
+This, overall, takes about 2 hours.
+
+1. Symlink the data folder
+```sh
+ln -s /ssd/pbagad/datasets/charades data/charades
+```
+
+2. Download and unzip RGB frames
+```sh
+cd scripts/prepare-charades/
+bash download_data.sh
+```
+
+3. Download the split files
+```sh
+bash download_annotations.sh
+```
+
+
+## Experiments on Charades
+
+### Fine-tuning a pre-trained VSSL model
+
+To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
+```sh
+conda activate slowfast
+cd /path/to/repo/
+export PYTHONPATH=$PWD
+
+cfg=configs/Charades/VSSL/32x8_112x112_R18_supervised.yaml
+bash scripts/jobs/train_on_charades.sh -c $cfg
+```
+This assumes that you have setup data folders symlinked into the repo. This shall save outputs in `./outputs/` folder. You can check `./outputs/<expt-folder-name>/logs/train_logs.txt` to see the training progress.
+
+:warning: Note that, on Charades, we obtain all our results using 1 GPU (NVIDIA RTX A600, 48GBs each) and a batch size of 16.
+
+:hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
+
+
+## Experiments on AVA
+
+We run all our experiments on AVA 2.2.
+
+### Fine-tuning a pre-trained VSSL model
+
+To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
+```sh
+bash scripts/jobs/train_on_ava.sh -c configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
+```
+
+You can check out other configs for fine-tuning with other video self-supervised methods.
+
+The training is followed by an evaluation on the test set. Thus, the numbers will be displayed in logs at the end of the run.
+
+:warning: Note that, on AVA, we train using 4 GPUs (GeForce GTX 1080 Ti, 11GBs each) and a batch size of 32.
+
+:hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
