@@ -96,7 +96,7 @@ python test.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pre
 ```
 
 ## Fine-gym Granularities 
-* For finetuning pretrained models with different Fine-gym granularities use training scripts in  ./scripts_finegym_actions
+* For finetuning pretrained models with different Fine-gym granularities (e.g gym_event_vault, gym_set_FX_S1, gym288, etc) use training scripts in  ./scripts_finegym_actions
 
 ```bash
 # Example finetuning pretrained  fully_supervised_kinetics model on set FX_S1  granularity
