@@ -17,10 +17,10 @@ On AVA, the task is fine-grained action detection. On Charades, the task is mult
     ```sh
     conda activate slowfast
     ```
-* (Refer to the following sections for setting up datasets) Symlink the dataset folder. Suppose Charades and AVA datasets are stored inside `/path/to/datasets/`. Then, run the following from the repo:
+<!-- * (Refer to the following sections for setting up datasets) Symlink the dataset folder. Suppose Charades and AVA datasets are stored inside `/path/to/datasets/`. Then, run the following from the repo:
     ```sh
     ln -s /path/to/datasets/ data
-    ```
+    ``` -->
 * Symlink the pre-trained models for initialization. Suppose all your VSSL pre-trained checkpoints are at `/path/to/checkpoints_pretraining`
     ```sh
     ls -s /path/to/checkpoints_pretraining/ checkpoints_pretraining
