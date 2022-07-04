@@ -1,0 +1,98 @@
+# Base config: configs/AVA/SLOW_8x8_R50_SHORT.yaml
+
+TRAIN:
+  ENABLE: True
+  DATASET: ava
+  BATCH_SIZE: 64
+  EVAL_PERIOD: 5
+  CHECKPOINT_PERIOD: 1
+  AUTO_RESUME: True
+  # CHECKPOINT_FILE_PATH: ./checkpoints/kinetics400/SLOWONLY_8x8_R50.pkl
+  CHECKPOINT_TYPE: caffe2
+
+DATA:
+  NUM_FRAMES: 32
+  SAMPLING_RATE: 2
+  TRAIN_JITTER_SCALES: [256, 320]
+  # TRAIN_CROP_SIZE: 224
+  TRAIN_CROP_SIZE: 112
+  # TEST_CROP_SIZE: 256
+  TEST_CROP_SIZE: 112
+  INPUT_CHANNEL_NUM: [3]
+
+DETECTION:
+  ENABLE: True
+  ALIGNED: True
+
+AVA:
+  DETECTION_SCORE_THRESH: 0.9
+  FRAME_DIR: "./data/ava/frames/"
+  FRAME_LIST_DIR: "./data/ava/annotations/"
+  ANNOTATION_DIR: "./data/ava/annotations/"
+  LABEL_MAP_FILE: "ava_action_list_v2.2_for_activitynet_2019.pbtxt"
+  EXCLUSION_FILE: "ava_val_excluded_timestamps_v2.2.csv"
+  GROUNDTRUTH_FILE: "ava_val_v2.2.csv"
+
+  TRAIN_LISTS: ["train.csv"]
+  TEST_LISTS: ["val.csv"]
+  
+  TRAIN_GT_BOX_LISTS: ["ava_train_v2.2.csv"]
+  TRAIN_PREDICT_BOX_LISTS: [
+    "ava_train_v2.2.csv",
+    "person_box_67091280_iou90/ava_detection_train_boxes_and_labels_include_negative_v2.2.csv",
+  ]
+  TEST_PREDICT_BOX_LISTS: ["person_box_67091280_iou90/ava_detection_val_boxes_and_labels.csv"]
+
+RESNET:
+  ZERO_INIT_FINAL_BN: True
+  WIDTH_PER_GROUP: 64
+  NUM_GROUPS: 1
+  DEPTH: 50
+  TRANS_FUNC: bottleneck_transform
+  STRIDE_1X1: False
+  NUM_BLOCK_TEMP_KERNEL: [[3], [4], [6], [3]]
+  SPATIAL_DILATIONS: [[1], [1], [1], [2]]
+  SPATIAL_STRIDES: [[1], [2], [2], [1]]
+NONLOCAL:
+  LOCATION: [[[]], [[]], [[]], [[]]]
+  GROUP: [[1], [1], [1], [1]]
+  INSTANTIATION: softmax
+BN:
+  USE_PRECISE_STATS: False
+  NUM_BATCHES_PRECISE: 200
+
+SOLVER:
+  BASE_LR: 0.1
+  LR_POLICY: steps_with_relative_lrs
+  STEPS: [0, 10, 15, 20]
+  LRS: [1, 0.1, 0.01, 0.001]
+  MAX_EPOCH: 20
+  MOMENTUM: 0.9
+  WEIGHT_DECAY: 1e-7
+  WARMUP_EPOCHS: 5.0
+  WARMUP_START_LR: 0.000125
+  OPTIMIZING_METHOD: sgd
+
+MODEL:
+  NUM_CLASSES: 80
+  ARCH: r2plus1d_18
+  MODEL_NAME: MOCO
+  CKPT: /home/pbagad/models/checkpoints_pretraining/moco/checkpoint_0199.pth.tar
+  LOSS_FUNC: bce
+  DROPOUT_RATE: 0.5
+  HEAD_ACT: sigmoid
+
+TEST:
+  ENABLE: True
+  DATASET: ava
+  BATCH_SIZE: 8
+
+DATA_LOADER:
+  NUM_WORKERS: 2
+  PIN_MEMORY: True
+
+NUM_GPUS: 8
+NUM_SHARDS: 1
+RNG_SEED: 0
+OUTPUT_DIR: .
+LOG_MODEL_INFO: False
