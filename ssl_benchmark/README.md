@@ -17,7 +17,7 @@ The datasets can be downloaded from the following links:
 * [UCF101 ](http://crcv.ucf.edu/data/UCF101.php)
 * [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something)
 * [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
-* For [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/) please send a request to Fine-Gym authors via [Form](https://docs.google.com/forms/d/e/1FAIpQLScg8KDmBl0oKc7FbBedT0UJJHxpBHQmgsKpc4nWo4dwdVJi0A/viewform) to get access to the dataset. After downloading the videos, follow  the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to trim the videos to subactions. (Note, if you also dowload the videos via [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) script some of the video will be  missing because of the broken youtube links, so we suggest to request the Fine-Gym authors to get access to whole dataset.)
+* For [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/) please send a request to Fine-Gym authors via [Form](https://docs.google.com/forms/d/e/1FAIpQLScg8KDmBl0oKc7FbBedT0UJJHxpBHQmgsKpc4nWo4dwdVJi0A/viewform) to get access to the dataset. After downloading the videos, follow  the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to trim the videos to subactions. (Note, if you also dowload the videos via [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) script some of the video will be  missing because of the broken youtube links, so we suggest to request the Fine-Gym authors to get access to whole dataset). Please contact us in case of any issues.
 
 * We provide the annoations that we use for each dataset in the ./data/ directory:
 * The expected directory hierarchy is as follow:
@@ -109,6 +109,19 @@ python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   -
 python test.py configs/benchmark/gym_set_FX_S1/112x112x32.yaml   --pretext-model-name  supervised --pretext-model-path ../checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth 
 ```
 
+## Linear Evaluation 
+* For evaluating pretrained models using linear evaluation on UCF-101 or Kinetics-400  use training scripts in  ./scripts_linear_evaluation
+
+```bash
+# Example linear evaluation on UCF-101
+
+# Training
+python linear_eval.py configs/benchmark/ucf/112x112x32-fold1-linear.yaml   --pretext-model-name  rspnet --pretext-model-path ../checkpoints_pretraining/rspnet/snellius_checkpoint_epoch_200.pth.tar --finetune-ckpt-path ./checkpoints/rspnet/ 
+
+# Testing
+#set test_only flag to true in the  config file and run
+python test.py configs/benchmark/ucf/112x112x32-fold1-linear.yaml   --pretext-model-name  rspnet --pretext-model-path ../checkpoints_pretraining/rspnet/snellius_checkpoint_epoch_200.pth.tar --finetune-ckpt-path ./checkpoints/rspnet/ 
+```
 
 ### Acknowledgements
  We use parts of  code from : [Audio-Visual Instance Discrimination with Cross-Modal Agreement](https://github.com/facebookresearch/AVID-CMA) for buliding this repo. 

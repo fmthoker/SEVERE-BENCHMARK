@@ -22,8 +22,8 @@ dataset:
   transform: "msc+color"
   min_area: 0.08
   color: [0.4, 0.4, 0.4, 0.2]
-  switch_channels: false
-  normalize: true
+  switch_channels: true
+  normalize: false
   train:
     split: "trainlist{fold:02d}"
     mode: "clip"
