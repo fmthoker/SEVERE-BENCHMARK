@@ -73,20 +73,19 @@ The datasets can be downloaded from the following links:
 * For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  ./scripts_domain_shift/
 ```bash
 # Example finetuning pretrained  gdt model on something-something-v2 
-### Training 
+
+## Training 
 python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/ --seed 100
-```
-```bash
-### Testing
+## Testing
 # After finetuning, set test_only flag to true in the  config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
 ## Sample size 
 * For finetuning pretrained models with different sample sizes use training scripts in  ./scripts_sample_sizes
 ```bash
+# Example finetuning pretrained  video_moco model with 1000 ucf101 examples  
 
 # Training
-# Example finetuning pretrained  video_moco model with 1000 ucf101 examples  
 python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  video_moco --pretext-model-path ../checkpoints_pretraining/video_moco/r2plus1D_checkpoint_0199.pth.tar --finetune-ckpt-path ./checkpoints/video_moco/ --seed 100
 # Note, set flag 'num_of_examples: to N'in the corresponding config file (e.g configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml) if you want to change the number of training samples to N.
 
