@@ -21,9 +21,10 @@ Below are the self-suprevised methods and the repositories that we evaluate.
 | GDT | https://github.com/facebookresearch/GDT |
 | Supervised | https://pytorch.org/vision/0.8/_modules/torchvision/models/video/resnet.html#r2plus1d_18 |
 
-* For SeLaVi, MoCo, VideoMoCO, Pretext-Contrast, CtP, TCLR and GDT we use the Kinetics-400 pretrained R(2+1D)-18 weights provided by the Authors. For RSPNet and AVID-CMA the author provided R2+1D-18 models differ form R(2+1D)-18 architecture defined in [A Closer Look at Spatiotemporal Convolutions for Action Recognition](https://arxiv.org/abs/1711.11248). Thus we use the  official implementation of the RSPNet and AVID-CMA and pretraining with the common R(2+1D)-18 backbone. 
+* For SeLaVi, MoCo, VideoMoCO, Pretext-Contrast, CtP, TCLR and GDT we use the Kinetics-400 pretrained R(2+1D)-18 weights provided by the Authors. 
+* For RSPNet and AVID-CMA the author provided R(2+1D)-18 models differ from the R(2+1D)-18 architecture defined in [A Closer Look at Spatiotemporal Convolutions for Action Recognition](https://arxiv.org/abs/1711.11248). Thus we use the  official implementation of the RSPNet and AVID-CMA and to pretrain  the common R(2+1D)-18 backbone with Kinetics-400 dataset. 
 
-* For Supervised, We use Kinetics-400 pretrained R(2+1D)-18 weights from the pytorch library.
+* For Supervised, We use Kinetics-400 pretrained R(2+1D)-18 [weights](https://download.pytorch.org/models/r2plus1d_18-91a641e6.pth) from the pytorch library.
 
 * To download all the pretrained models the we evaluate follow the link  [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC).
 ```bash
