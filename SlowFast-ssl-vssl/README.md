@@ -123,6 +123,7 @@ The training is followed by an evaluation on the test set. Thus, the numbers wil
 
 To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
+# activate the environment
 conda activate slowfast
 
 # make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
