@@ -13,6 +13,10 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
     ```sh
     git clone https://github.com/fmthoker/SEVERE_BENCHMARK.git
     ```
+    Go to the experiment folder for AVA and Charades.
+    ```sh
+    cd SlowFast-ssl-vssl/
+    ```
 * Create conda environment and install dependencies:
     ```sh
     bash setup/create_env.sh slowfast
