@@ -1,4 +1,4 @@
-DATA_DIR="../../data/ava/videos"
+DATA_DIR="../../data/AVA/videos"
 
 if [[ ! -d "${DATA_DIR}" ]]; then
   echo "${DATA_DIR} doesn't exist. Creating it.";
