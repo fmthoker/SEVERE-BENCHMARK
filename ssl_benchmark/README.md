@@ -1,9 +1,11 @@
 #  Expirements Action Recognition 
 ### Evaluating self-supervised video representation models for Domain Shift, Sample Sizes and Fine-grained action classification. 
 
-## Requirements
+## Install Requirements
 
 * pip install -r requirements.txt 
+
+We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work but are not tested.
 
 ## Pretrained Models
 Below are the self-suprevised methods and the repositories that we evaluate.
