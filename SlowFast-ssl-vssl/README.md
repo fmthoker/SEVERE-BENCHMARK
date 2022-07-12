@@ -44,65 +44,77 @@ To evaluate video self-supervised pre-training methods used in the paper, you ne
 
 ## Dataset preparation
 
-### Data preparation for AVA
+The data processing steps for each of AVA and Charades datasets is quite tedious. The steps for each of them are listed below.
 
-Overall, the data preparation for AVA takes about 20 hours.
-
-1. Symlink the data folder
+First, you need to create a symlink to the root dataset folder into the repo. For e.g., if you store all your datasets at `/path/to/datasets/`, then,
 ```sh
 # make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
-mkdir -p data
-
-# example: /ssd/pbagad/datasets/AVA
-export ROOT_DATA_DIR=/path/to/where/you/want/to/store/AVA-dataset
-
-# symlink
-ln -s $ROOT_DATA_DIR data/AVA/
+ln -s /path/to/datasets/ data
 ```
 
-2. Download: This step takes about 3.5 hours.
+### [AVA](https://research.google.com/ava/download.html)
+
+:hourglass: Overall, the data preparation for AVA takes about 20 hours.
+
+These steps are based on the ones in original repo.
+
+1. Download: This step takes about 3.5 hours.
 ```sh
 cd scripts/prepare-ava/
 bash download_data.sh
 ```
 
-3. Cut each video from its 15th to 30th minute: This step takes about 14 hours.
+2. Cut each video from its 15th to 30th minute: This step takes about 14 hours.
 ```sh
 bash cut_videos.sh
 ```
 
-4. Extract frames: This step takes about 1 hour.
+3. Extract frames: This step takes about 1 hour.
 ```sh
 bash extract_frames.sh
 ```
 
-5. Download annotations: This step takes about 30 minutes.
+4. Download annotations: This step takes about 30 minutes.
 ```sh
 bash download_annotations.sh
 ```
 
-6. Setup exception videos that may have failed the first time. For me, there was this video `I8j6Xq2B5ys.mp4` that failed the first time. See `scripts/prepare-ava/exception.sh` to re-run the steps for such videos.
+5. Setup exception videos that may have failed the first time. For me, there was this video `I8j6Xq2B5ys.mp4` that failed the first time. See `scripts/prepare-ava/exception.sh` to re-run the steps for such videos.
 
-### Data preparation for Charades
+### [Charades](https://prior.allenai.org/projects/charades)
 
-This, overall, takes about 2 hours.
+:hourglass: This, overall, takes about 2 hours.
 
-1. Symlink the data folder
-```sh
-# make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
-ln -s /ssd/pbagad/datasets/charades data/charades
-```
-
-2. Download and unzip RGB frames
+1. Download and unzip RGB frames
 ```sh
 cd scripts/prepare-charades/
 bash download_data.sh
 ```
 
-3. Download the split files
+2. Download the split files
 ```sh
 bash download_annotations.sh
 ```
+
+
+## Experiments on AVA
+
+We run all our experiments on AVA 2.2.
+
+### Fine-tuning a pre-trained VSSL model
+
+To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
+```sh
+bash scripts/jobs/train_on_ava.sh -c configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
+```
+
+You can check out other configs for fine-tuning with other video self-supervised methods.
+
+The training is followed by an evaluation on the test set. Thus, the numbers will be displayed in logs at the end of the run.
+
+:warning: Note that, on AVA, we train using 4 GPUs (GeForce GTX 1080 Ti, 11GBs each) and a batch size of 32.
+
+:hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
 
 
 ## Experiments on Charades
@@ -125,22 +137,3 @@ This assumes that you have setup data folders symlinked into the repo. This shal
 
 :hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
 
-
-## Experiments on AVA
-
-We run all our experiments on AVA 2.2.
-
-### Fine-tuning a pre-trained VSSL model
-
-To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
-```sh
-bash scripts/jobs/train_on_ava.sh -c configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
-```
-
-You can check out other configs for fine-tuning with other video self-supervised methods.
-
-The training is followed by an evaluation on the test set. Thus, the numbers will be displayed in logs at the end of the run.
-
-:warning: Note that, on AVA, we train using 4 GPUs (GeForce GTX 1080 Ti, 11GBs each) and a batch size of 32.
-
-:hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
