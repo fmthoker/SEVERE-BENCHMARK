@@ -62,16 +62,18 @@ The datasets can be downloaded from the following links:
 │   │   │   └──
 │   │   └── videos
 │   │       ├── *.avi
-│   │       │   
 │   │       └── ...
+│   │
 │   │──smth-smth-v2
-│   │   ├── 20bn-something-something-v2
-│   │   │   └── *.avi
-│   │   └── something-something-v2-annotations
-│   │       ├── something-something-v2-labels.json
-│   │       ├── something-something-v2-test.json
-│   │       ├── something-something-v2-train.json
-│   │       └── something-something-v2-validation.json
+│   │   ├── something-something-v2-annotations
+│   │   │   ├── something-something-v2-labels.json
+│   │   │   ├── something-something-v2-test.json
+│   │   │   ├── something-something-v2-train.json
+│   │   │   └── something-something-v2-validation.json
+│   │   │       
+│   │   └── 20bn-something-something-v2
+│   │       └── *.avi
+│   │          
 │   ├──ntu60
 │   │   ├── ntu_60_cross_subject_TrainTestlist
 │   │   │   ├── classInd.txt
@@ -84,9 +86,20 @@ The datasets can be downloaded from the following links:
 │   │       ├── brushing_teeth
 │   │       │   └── *.avi
 │   │       └── ...
+│   │
+│   ├──kinetics-400
+│   │   ├── labels
+│   │   │   ├── train_videofolder.txt
+│   │   │   ├── val_videofolder.txt
+│   │   │   └── ...
+│   │   └── VideoData
+│   │       ├── playing_cards
+│   │       │   └── *.avi
+│   │       ├── singing
+│   │       │   └── *.avi
+│   │       └── ...
 └── ...
 ```
-
 
 
 ## Domain Shift 
