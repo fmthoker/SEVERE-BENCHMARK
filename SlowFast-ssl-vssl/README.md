@@ -105,7 +105,8 @@ We run all our experiments on AVA 2.2.
 
 To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
-bash scripts/jobs/train_on_ava.sh -c configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
+cfg=configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
+bash scripts/jobs/train_on_ava.sh -c $cfg
 ```
 
 You can check out other configs for fine-tuning with other video self-supervised methods.
