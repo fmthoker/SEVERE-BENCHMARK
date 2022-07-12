@@ -3,7 +3,9 @@
 
 ## Install Requirements
 
-* pip install -r requirements.txt 
+```bash
+pip install -r requirements.txt 
+```
 
 We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work but are not tested.
 
