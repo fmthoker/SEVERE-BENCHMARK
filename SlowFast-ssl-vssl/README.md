@@ -109,7 +109,22 @@ cfg=configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
 bash scripts/jobs/train_on_ava.sh -c $cfg
 ```
 
-You can check out other configs for fine-tuning with other video self-supervised methods.
+You can check out other configs for fine-tuning with other video self-supervised methods. The configs for all pre-training methods is provided below:
+
+| Model            | Config                               |
+|------------------|--------------------------------------|
+| No pre-training  | `32x2_112x112_R18_v2.2_scratch.yaml` |
+| SeLaVi           |                                      |
+| MoCo             |                                      |
+| VideoMoCo        |                                      |
+| Pretext-Contrast |                                      |
+| RSPNet           |                                      |
+| AVID-CMA         |                                      |
+| CtP              |                                      |
+| TCLR             |                                      |
+| GDT              |                                      |
+| Supervised       |                                      |
+|                  |                                      |
 
 The training is followed by an evaluation on the test set. Thus, the numbers will be displayed in logs at the end of the run.
 
