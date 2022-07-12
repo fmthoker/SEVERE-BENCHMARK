@@ -9,6 +9,10 @@ For more details about more broader usage of the SlowFast code, please refer to 
 
 We use `conda` to manage dependencies. If you have not installed `anaconda3` or `miniconda3`, please install it before following the steps below.
 
+* Clone the repository (if not already done)
+    ```sh
+    git clone https://github.com/fmthoker/SEVERE_BENCHMARK.git
+    ```
 * Create conda environment and install dependencies:
     ```sh
     bash setup/create_env.sh slowfast
