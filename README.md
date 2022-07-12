@@ -23,3 +23,10 @@ TLDR: We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</ins
 **Out-of-domain tasks**: We use multi-label classification on Charades and action detection on AVA as examples of task-shift on domains far away from the standard UCF101.
 
 ### The SEVERE Benchmark
+
+### Maintainers
+
+* [Fida Thoker](https://fmthoker.github.io/)
+* [Piyush Bagad](https://bpiyush.github.io/)
+
+:bell: If you face an issue or have suggestions, please create a Github issue and we will try our best to address soon.
