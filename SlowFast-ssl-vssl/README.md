@@ -111,20 +111,19 @@ bash scripts/jobs/train_on_ava.sh -c $cfg
 
 You can check out other configs for fine-tuning with other video self-supervised methods. The configs for all pre-training methods is provided below:
 
-| Model            | Config                               |
-|------------------|--------------------------------------|
-| No pre-training  | `32x2_112x112_R18_v2.2_scratch.yaml` |
-| SeLaVi           |                                      |
-| MoCo             |                                      |
-| VideoMoCo        |                                      |
-| Pretext-Contrast |                                      |
-| RSPNet           |                                      |
-| AVID-CMA         |                                      |
-| CtP              |                                      |
-| TCLR             |                                      |
-| GDT              |                                      |
-| Supervised       |                                      |
-|                  |                                      |
+| **Model**        | **Config**                                    |
+|------------------|-----------------------------------------------|
+| No pre-training  | `32x2_112x112_R18_v2.2_scratch.yaml`          |
+| SeLaVi           | `32x2_112x112_R18_v2.2_selavi.yaml`           |
+| MoCo             | `32x2_112x112_R18_v2.2_moco.yaml`             |
+| VideoMoCo        | `32x2_112x112_R18_v2.2_video_moco.yaml`       |
+| Pretext-Contrast | `32x2_112x112_R18_v2.2_pretext_contrast.yaml` |
+| RSPNet           | `32x2_112x112_R18_v2.2_rspnet.yaml`           |
+| AVID-CMA         | `32x2_112x112_R18_v2.2_avid_cma.yaml`         |
+| CtP              | `32x2_112x112_R18_v2.2_ctp.yaml`              |
+| TCLR             | `32x2_112x112_R18_v2.2_tclr.yaml`             |
+| GDT              | `32x2_112x112_R18_v2.2_gdt.yaml`              |
+| Supervised       | `32x2_112x112_R18_v2.2_supervised.yaml`       |
 
 The training is followed by an evaluation on the test set. Thus, the numbers will be displayed in logs at the end of the run.
 
