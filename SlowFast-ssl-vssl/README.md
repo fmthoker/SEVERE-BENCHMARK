@@ -22,7 +22,10 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
     bash setup/create_env.sh slowfast
     ```
     This will create and activate a conda environment called `slowfast`.
-    Please activate it for further steps.
+    
+    :warning: We use `torch==1.9.0` with CUDA 11.1. If you have a CUDA with a different version, kindly use an apt [PyTorch version](https://pytorch.org/get-started/previous-versions/). You will need to follow the steps in `setup/create_env.sh` manually to install different versions of dependencies.
+    
+    Please activate the environment for further steps.
     ```sh
     conda activate slowfast
     ```
