@@ -78,7 +78,7 @@ MODEL:
   ARCH: r2plus1d_18
   MODEL_NAME: VSSL
   INIT_METHOD: supervised
-  CKPT: ./checkpoints_pretraining/full_supervision/r2plus1d_18-91a641e6.pth
+  CKPT: ./checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth
   LOSS_FUNC: bce
   DROPOUT_RATE: 0.5
   HEAD_ACT: sigmoid

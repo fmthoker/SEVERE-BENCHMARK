@@ -53,7 +53,7 @@ IFS='/' read -r -a array <<< $expt_folder
 expt_folder="${array[-2]}--${array[-1]}"
 
 if [ "$base_outdir" ==  "" ];then
-       base_outdir=$repo/outputs/
+       base_outdir=$repo/outputs/charades/
 fi
 mkdir -p $base_outdir
 
