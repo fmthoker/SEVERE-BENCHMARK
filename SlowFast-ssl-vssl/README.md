@@ -50,7 +50,7 @@ Overall, the data preparation for AVA takes about 20 hours.
 
 1. Symlink the data folder
 ```sh
-cd /path/to/repo/
+# make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
 mkdir -p data
 
 # example: /ssd/pbagad/datasets/AVA
@@ -89,6 +89,7 @@ This, overall, takes about 2 hours.
 
 1. Symlink the data folder
 ```sh
+# make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
 ln -s /ssd/pbagad/datasets/charades data/charades
 ```
 
@@ -111,7 +112,8 @@ bash download_annotations.sh
 To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
 conda activate slowfast
-cd /path/to/repo/
+
+# make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
 export PYTHONPATH=$PWD
 
 cfg=configs/Charades/VSSL/32x8_112x112_R18_supervised.yaml
