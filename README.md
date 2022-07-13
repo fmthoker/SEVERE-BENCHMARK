@@ -67,7 +67,7 @@ From our analysis we distill the SEVERE-benchmark, a subset of our experiments, 
 
 If you use our work, kindly consider citing our paper:
 ```
-@InProceedings{Thoker:2020:SEVERE:ECCV,
+@InProceedings{Thoker:2022:SEVERE:ECCV,
     author    = {Thoker, Fida and Doughty, Hazel and Bagad, Piyush and Snoek, Cees},
     title     = {How Severe is Benchmark-Sensitivity in Video Self-Supervised Learning?},
     booktitle = {European Conference on Computer Vision (ECCV)},
