@@ -1,1 +1,0 @@
-from .mfnet_3d import MFNET_3D
