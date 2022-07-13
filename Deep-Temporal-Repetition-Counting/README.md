@@ -1,4 +1,6 @@
-## Evaluating self-supervised video representation models for the task of Deep-Temporal-Repetition-Counting
+# Expirements  Temporal-Repetition-Counting
+### Evaluating self-supervised video representation models for the task of Deep-Temporal-Repetition-Counting
+This sub-repo is based on official implementation of ["Context-aware and Scale-insensitive Temporal Repetition Counting"](https://github.com/Xiaodomgdomg/Deep-Temporal-Repetition-Counting). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D-18 backbone.
 
 ## Requirements
 

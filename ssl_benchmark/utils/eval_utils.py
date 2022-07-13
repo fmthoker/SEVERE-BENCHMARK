@@ -26,7 +26,7 @@ def parameter_description(model):
 def freeze_backbone(model,pretext_model):
 
     for n, p in model.named_parameters():
-        if 'classifier' in n or 'fc' in n or 'linear' in n:
+        if 'fc' in n:
             p.requires_grad = True
         else:
             p.requires_grad = False

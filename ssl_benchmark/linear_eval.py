@@ -81,6 +81,9 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     # create pretext model
     model, ckp_manager = get_model( cfg, eval_dir, args, logger) 
 
+    # freeze backbone
+    model = utils.eval_utils.freeze_backbone(model,args.pretext_model)
+
     # Log model description
     logger.add_line("=" * 30 + "   Parameters   " + "=" * 30)
     logger.add_line(eval_utils.parameter_description(model))
