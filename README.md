@@ -10,7 +10,7 @@ TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</in
 
 ## Overview of Experiments 
 
-Our comprehensive set of over 500 experiments encompasses 7 video datasets, 9 self-supervised methods and 6 video understanding tasks.
+Our comprehensive set of over 500 experiments encompasses 7 video datasets, 9 video self-supervised learning (VSSL) methods and 6 video understanding tasks.
 
 ### Evaluated VSSL models
 
@@ -29,6 +29,14 @@ Below are the self-suprevised methods and the repositories that we evaluate.
 | GDT | https://github.com/facebookresearch/GDT |
 | Supervised | https://pytorch.org/vision/0.8/_modules/torchvision/models/video/resnet.html#r2plus1d_18 |
 
+
+* For SeLaVi, MoCo, VideoMoCO, Pretext-Contrast, CtP, TCLR and GDT we use the Kinetics-400 pretrained R(2+1D)-18 weights provided by the Authors.
+* For RSPNet and AVID-CMA the author provided R(2+1D)-18 weights differ from the R(2+1D)-18 architecture defined in A Closer Look at Spatiotemporal Convolutions for Action Recognition. Thus we use the official implementation of the RSPNet and AVID-CMA and to pretrain with the common R(2+1D)-18 backbone on Kinetics-400 dataset.
+* For Supervised, We use the Kinetics-400 pretrained R(2+1D)-18 weights from the pytorch library.
+
+Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC). Unzip the downloaded file and it shall create a folder `checkpoints_pretraining/` with all weights.
+
+## Experiments
 
 We divide these domwstream evaluations across four axes:
 
