@@ -1,5 +1,5 @@
 
-# IV. Downstream Task-shift
+# IV. Downstream Task-shift (out-of-domain)
 
 This sub-repo is based on Facebook's official [SlowFast repo](https://github.com/facebookresearch/SlowFast). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D backbone for AVA and Charades datasets. On AVA, the task is fine-grained action detection. On Charades, the task is multi-label action classification.
 

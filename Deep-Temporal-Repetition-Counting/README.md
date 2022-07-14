@@ -1,24 +1,38 @@
-# Expirements  Temporal-Repetition-Counting
-### Evaluating self-supervised video representation models for the task of Deep-Temporal-Repetition-Counting
+# IV. Downstream Task-shift (in-domain)
+
+Evaluating self-supervised video representation models for the task of Deep-Temporal-Repetition-Counting.
+
 This sub-repo is based on official implementation of ["Context-aware and Scale-insensitive Temporal Repetition Counting"](https://github.com/Xiaodomgdomg/Deep-Temporal-Repetition-Counting). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D-18 backbone.
 
-## Requirements
+## Table of Contents
 
-* pip install -r requirements.txt 
+* [Setup](#setup)
+* [Evaluated VSSL models](#evaluated-vssl-models)
+* [Dataset Preparation](#dataset-preparation)
+    * [UCFRep](#ucfrep)
+* [Training](#training)
+* [Testing](#testing)
+* [Acknowledgements](#acknowledgements)
 
-## Pretrained Models
-* Please download our pretrained models  [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC).
-```bash
-mv checkpoints_pretraining/ ..
+## Setup
+
+* Create a `conda` environment
+* Install dependencies
+```sh
+pip install -r requirements.txt 
 ```
+
+## Evaluated VSSL models
+
+* To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
 
 ## Dataset Preparation
 
 ### UCFRep
 * Please download the UCF101 dataset [here](http://crcv.ucf.edu/data/UCF101.php).
- * Convert UCF101 videos from avi to png files, put the png files to data/ori_data/ucf526/imgs/train and data/ori_data/ucf526/imgs/val
+* Convert UCF101 videos from avi to png files, put the png files to data/ori_data/ucf526/imgs/train and `data/ori_data/ucf526/imgs/val`
 
-### Training
+## Training
 For finetuning pretrained models for the task of Repetition-Counting run as following:
 
 ```bash
@@ -46,7 +60,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python main.py   --batch_size 32  --result_path res
 CUDA_VISIBLE_DEVICES=0,1,2,3 python main.py   --batch_size 32  --result_path results/r2+1d_18_kinetics_pretrained_full_supervision  --pretext_model_name supervised --pretext_model_path ../checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth 
 
 ```
-### Testing
+
+## Testing
 
 python main.py --no_train --resume_path = path to the finetuned_checkpoint with best validation accuracy (check validations logs )
 
