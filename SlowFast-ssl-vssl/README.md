@@ -5,6 +5,14 @@ This sub-repo is based on Facebook's official [SlowFast repo](https://github.com
 
 For more details about more broader usage of the SlowFast code, please refer to the [Getting started](https://github.com/facebookresearch/SlowFast/blob/main/GETTING_STARTED.md) guide in the official repo. All credits and copyrights are reserved with the original repository authors.
 
+
+## Table of Contents
+
+* [Setup](#setup)
+* [Evaluated VSSL models](#evaluated-vssl-models)
+* [Task: Action Detection](#task-action-detection)
+* [Task: Multi-Label Classification](#task-multi-label-classification)
+
 ## Setup
 
 We use `conda` to manage dependencies. If you have not installed `anaconda3` or `miniconda3`, please install it before following the steps below.
@@ -45,17 +53,19 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
     ls -s ../checkpoints_pretraining/ checkpoints_pretraining
     ```
 
-## Dataset preparation
+## Task: Action Detection
 
-The data processing steps for each of AVA and Charades datasets is quite tedious. The steps for each of them are listed below.
+For this task, we use the [AVA](https://research.google.com/ava/download.html) dataset.
+
+### Dataset Preparation
+
+The data processing steps for AVA dataset is quite tedious. The steps for each of them are listed below.
 
 First, you need to create a symlink to the root dataset folder into the repo. For e.g., if you store all your datasets at `/path/to/datasets/`, then,
 ```sh
 # make sure you are inside the `SlowFast-ssl-vssl/` folder in the repo
 ln -s /path/to/datasets/ data
 ```
-
-### [AVA](https://research.google.com/ava/download.html)
 
 :hourglass: Overall, the data preparation for AVA takes about 20 hours.
 
@@ -84,29 +94,9 @@ bash download_annotations.sh
 
 5. Setup exception videos that may have failed the first time. For me, there was this video `I8j6Xq2B5ys.mp4` that failed the first time. See `scripts/prepare-ava/exception.sh` to re-run the steps for such videos.
 
-### [Charades](https://prior.allenai.org/projects/charades)
+### Experiments
 
-:hourglass: This, overall, takes about 2 hours.
-
-1. Download and unzip RGB frames
-```sh
-cd scripts/prepare-charades/
-bash download_data.sh
-```
-
-2. Download the split files
-```sh
-bash download_annotations.sh
-```
-
-
-## Experiments on AVA
-
-We run all our experiments on AVA 2.2.
-
-### Fine-tuning a pre-trained VSSL model
-
-To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
+We run all our experiments on AVA 2.2. To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
 cfg=configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
 bash scripts/jobs/train_on_ava.sh -c $cfg
@@ -135,9 +125,26 @@ The training is followed by an evaluation on the test set. Thus, the numbers wil
 :hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
 
 
-## Experiments on Charades
+## Task: Multi-Label Classification
 
-### Fine-tuning a pre-trained VSSL model
+For this task, we use the [Charades](https://prior.allenai.org/projects/charades) dataset.
+
+### Dataset Preparation
+
+:hourglass: This, overall, takes about 2 hours.
+
+1. Download and unzip RGB frames
+```sh
+cd scripts/prepare-charades/
+bash download_data.sh
+```
+
+2. Download the split files
+```sh
+bash download_annotations.sh
+```
+
+### Experiments
 
 To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
@@ -148,11 +155,12 @@ conda activate slowfast
 export PYTHONPATH=$PWD
 
 cfg=configs/Charades/VSSL/32x8_112x112_R18_supervised.yaml
-bash scripts/jobs/train_on_charades.sh -c $cfg
+bash scripts/jobs/train_on_charades.sh -c $cfg -n 1 -b 16
 ```
 This assumes that you have setup data folders symlinked into the repo. This shall save outputs in `./outputs/` folder. You can check `./outputs/<expt-folder-name>/logs/train_logs.txt` to see the training progress.
+
+For other VSSL models, please check other configs in `configs/Charades/VSSL/`.
 
 :warning: Note that, on Charades, we obtain all our results using 1 GPU (NVIDIA RTX A600, 48GBs each) and a batch size of 16.
 
 :hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
-
