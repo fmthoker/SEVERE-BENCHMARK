@@ -11,7 +11,11 @@ For more details about more broader usage of the SlowFast code, please refer to 
 * [Setup](#setup)
 * [Evaluated VSSL models](#evaluated-vssl-models)
 * [Task: Action Detection](#task-action-detection)
+    * [Dataset Preparation: AVA](#dataset-preparation-ava)
+    * [Experiments](#expts-ava)
 * [Task: Multi-Label Classification](#task-multi-label-classification)
+    * [Dataset Preparation: Charades](#dataset-preparation-charades)
+    * [Experiments](#expts-charades)
 
 ## Setup
 
@@ -57,7 +61,7 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
 
 For this task, we use the [AVA](https://research.google.com/ava/download.html) dataset.
 
-### Dataset Preparation
+### Dataset Preparation: AVA
 
 The data processing steps for AVA dataset is quite tedious. The steps for each of them are listed below.
 
@@ -94,7 +98,7 @@ bash download_annotations.sh
 
 5. Setup exception videos that may have failed the first time. For me, there was this video `I8j6Xq2B5ys.mp4` that failed the first time. See `scripts/prepare-ava/exception.sh` to re-run the steps for such videos.
 
-### Experiments
+### Experiments <a class="anchor" id="expts-ava"></a>
 
 We run all our experiments on AVA 2.2. To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
@@ -129,7 +133,7 @@ The training is followed by an evaluation on the test set. Thus, the numbers wil
 
 For this task, we use the [Charades](https://prior.allenai.org/projects/charades) dataset.
 
-### Dataset Preparation
+### Dataset Preparation: Charades
 
 :hourglass: This, overall, takes about 2 hours.
 
@@ -144,7 +148,7 @@ bash download_data.sh
 bash download_annotations.sh
 ```
 
-### Experiments
+### Experiments <a class="anchor" id="expts-charades"></a>
 
 To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
