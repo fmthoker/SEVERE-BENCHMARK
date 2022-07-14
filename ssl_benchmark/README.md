@@ -1,41 +1,34 @@
-#  Expirements Action Recognition 
-### Evaluating self-supervised video representation models for Domain Shift, Sample Sizes and Fine-grained action classification. 
+# Experiments on Action Recognition
 
-## Install Requirements
+Evaluating self-supervised video representation models for Domain Shift, Sample Sizes and Fine-grained action classification. 
 
+## Table of Contents
+
+* [Setup](#setup)
+* [Evaluated VSSL models](#evaluated-vssl-models)
+* [Dataset Preparation](#dataset-preparation)
+* [Experiments](#experiments)
+    * [I. Downstream domain-shift](#i-downstream-domain-shift)
+    * [II. Downstream sample-sizes](#ii-downstream-sample-sizes)
+    * [III. Downstream fine-grained action classification](#iii-downstream-fine-grained-action-classification)
+    * [Linear evaluation](#linear-evaluation)
+* [Acknowledgements](#acknowledgements)
+
+## Setup
+
+We recommend creating a `conda` environment and installing dependencies in it by using:
 ```bash
 pip install -r requirements.txt 
 ```
 
 We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work but are not tested.
 
-## Pretrained Models
-Below are the self-suprevised methods and the repositories that we evaluate.
+## Evaluated VSSL models
 
-| Model | URL |
-|-------|-----|
-| SeLaVi| https://github.com/facebookresearch/selavi |
-| MoCo| https://github.com/tinapan-pt/VideoMoCo |
-| VideoMoCo | https://github.com/tinapan-pt/VideoMoCo |
-| Pretext-Contrast | https://github.com/BestJuly/Pretext-Contrastive-Learning  |
-| RSPNet | https://github.com/PeihaoChen/RSPNet |
-| AVID-CMA | https://github.com/facebookresearch/AVID-CMA |
-| CtP | https://github.com/microsoft/CtP |
-| TCLR | https://github.com/DAVEISHAN/TCLR |
-| GDT | https://github.com/facebookresearch/GDT |
-| Supervised | https://pytorch.org/vision/0.8/_modules/torchvision/models/video/resnet.html#r2plus1d_18 |
-
-* For SeLaVi, MoCo, VideoMoCO, Pretext-Contrast, CtP, TCLR and GDT we use the Kinetics-400 pretrained R(2+1D)-18 weights provided by the Authors. 
-* For RSPNet and AVID-CMA the author provided R(2+1D)-18 weights differ from the R(2+1D)-18 architecture defined in [A Closer Look at Spatiotemporal Convolutions for Action Recognition](https://arxiv.org/abs/1711.11248). Thus we use the  official implementation of the RSPNet and AVID-CMA and to pretrain  with the common R(2+1D)-18 backbone on Kinetics-400 dataset. 
-
-* For Supervised, We use the Kinetics-400 pretrained R(2+1D)-18 [weights](https://download.pytorch.org/models/r2plus1d_18-91a641e6.pth) from the pytorch library.
-
-* Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from  [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC).
-```bash
-mv checkpoints_pretraining/ ..
-```
+* To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
 
 ## Dataset Preparation
+
 The datasets can be downloaded from the following links:
 
 * [UCF101 ](http://crcv.ucf.edu/data/UCF101.php)
@@ -105,9 +98,13 @@ The datasets can be downloaded from the following links:
 └── ...
 ```
 
+## Experiments
 
-## Domain Shift 
-* For finetuning pretrained models on domain shift datasets (e.g something_something_v2,gym_99, etc) use training scripts in  ./scripts_domain_shift/
+Below, we run experiments for domain-shift, sample-sizes and fine-grained action classification.
+
+### I. Downstream domain-shift
+
+* For finetuning pretrained models on domain shift datasets (e.g `something_something_v2`, `gym_99`, etc) use training scripts in  `./scripts_domain_shift/`
 ```bash
 # Example finetuning pretrained  gdt model on something-something-v2 
 
@@ -117,8 +114,11 @@ python finetune.py  configs/benchmark/something/112x112x32.yaml  --pretext-model
 # After finetuning, set test_only flag to true in the  config file (e.g configs/benchmark/something/112x112x32.yaml)  and run
 python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-name  gdt --pretext-model-path ../checkpoints_pretraining/gdt/gdt_K400.pth --finetune-ckpt-path ./checkpoints/gdt/
 ```
-## Sample size 
-* For finetuning pretrained models with different sample sizes use training scripts in  ./scripts_sample_sizes
+
+### II. Downstream sample-sizes
+
+* For finetuning pretrained models with different sample sizes use training scripts in  `./scripts_sample_sizes`
+
 ```bash
 # Example finetuning pretrained  video_moco model with 1000 ucf101 examples  
 
@@ -131,8 +131,11 @@ python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   -
 python test.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pretext-model-name  video_moco --pretext-model-path ../checkpoints_pretraining/video_moco/r2plus1D_checkpoint_0199.pth.tar --finetune-ckpt-path ./checkpoints/video_moco/ 
 ```
 
-## Fine-gym Granularities 
-* For finetuning pretrained models with different Fine-gym granularities (e.g gym_event_vault, gym_set_FX_S1, gym288, etc) use training scripts in  ./scripts_finegym_actions
+### III. Downstream action-granularities
+
+For this, we use the FineGym dataset that comes with a hierarchicy of actions.
+
+* For finetuning pretrained models with different Fine-gym granularities (e.g `gym_event_vault`, `gym_set_FX_S1`, `gym288`, etc) use training scripts in  `./scripts_finegym_actions`
 
 ```bash
 # Example finetuning pretrained  fully_supervised_kinetics model on set FX_S1  granularity
@@ -145,8 +148,9 @@ python finetune.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   -
 python test.py configs/benchmark/gym_set_FX_S1/112x112x32.yaml   --pretext-model-name  supervised --pretext-model-path ../checkpoints_pretraining/fully_supervised_kinetics/r2plus1d_18-91a641e6.pth 
 ```
 
-## Linear Evaluation 
-* For evaluating pretrained models using linear evaluation on UCF-101 or Kinetics-400  use training scripts in  ./scripts_linear_evaluation
+### Linear Evaluation 
+
+* For evaluating pretrained models using linear evaluation on UCF-101 or Kinetics-400  use training scripts in  `./scripts_linear_evaluation`
 
 ```bash
 # Example linear evaluation on UCF-101
@@ -160,4 +164,5 @@ python test.py configs/benchmark/ucf/112x112x32-fold1-linear.yaml   --pretext-mo
 ```
 
 ### Acknowledgements
+
  We use parts of  code from : [Audio-Visual Instance Discrimination with Cross-Modal Agreement](https://github.com/facebookresearch/AVID-CMA) for buliding this repo. 
