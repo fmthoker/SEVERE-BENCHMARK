@@ -38,7 +38,7 @@ Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from [here](
 
 ## Experiments
 
-We divide these domwstream evaluations across four axes:
+We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
