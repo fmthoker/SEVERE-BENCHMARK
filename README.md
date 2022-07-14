@@ -32,25 +32,25 @@ Below are the self-suprevised methods and the repositories that we evaluate.
 
 We divide these domwstream evaluations across four axes:
 
-### I. Downstream domains
+### I. Downstream domain-shift
 
 We analyse whether features learned by self-supervised models transfer to datasets that vary in domain with respect to the pre-training dataset.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
 
-### II. Downstream samples
+### II. Downstream sample-sizes
 
 We evaluate the sensitivity of self-supervised methods to the number of downstream samples available for finetuning.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream samples.
 
-### III. Downstream actions
+### III. Downstream action granularities
 
 We investigate whether self-supervised methods can learn fine-grained features required for recognizing semantically similar actions.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream actions.
 
-### IV. Downstream tasks
+### IV. Downstream task-shift
 
 We study the sensitivity of video self-supervised methods to the downstream task and question whether self-supervised features can be used beyond action recognition.
 
