@@ -1,5 +1,5 @@
 
-# Experiments on AVA and Charades
+# IV. Downstream Task-shift
 
 This sub-repo is based on Facebook's official [SlowFast repo](https://github.com/facebookresearch/SlowFast). We extend it to experiment with various video self-supervised learning methods to initialize weights of R(2+1)D backbone for AVA and Charades datasets. On AVA, the task is fine-grained action detection. On Charades, the task is multi-label action classification.
 
@@ -34,12 +34,15 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
     ln -s /path/to/datasets/ data
     ``` -->
 
-## Pre-trained models
-To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. Download those from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC), if not already downloaded. Unzip the downloaded file. This will create `checkpoints_pretraining/` folder which contains checkpoints for each of the methods used in the paper.
+## Evaluated VSSL models
 
-* Symlink the pre-trained models for initialization. Suppose all your VSSL pre-trained checkpoints are at `/path/to/checkpoints_pretraining`
+To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
+
+Download those from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC), if not already downloaded. Unzip the downloaded file. This will create `checkpoints_pretraining/` folder which contains checkpoints for each of the methods used in the paper.
+
+* Symlink the pre-trained models for initialization. Suppose all your VSSL pre-trained checkpoints are at `../checkpoints_pretraining`
     ```sh
-    ls -s /path/to/checkpoints_pretraining/ checkpoints_pretraining
+    ls -s ../checkpoints_pretraining/ checkpoints_pretraining
     ```
 
 ## Dataset preparation
