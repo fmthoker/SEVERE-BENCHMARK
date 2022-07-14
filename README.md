@@ -12,7 +12,7 @@ TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</in
 
 Our comprehensive set of over 500 experiments encompasses 7 video datasets, 9 self-supervised methods and 6 video understanding tasks.
 
-### Pre-trained models
+### Evaluated VSSL models
 
 Below are the self-suprevised methods and the repositories that we evaluate.
 
