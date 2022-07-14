@@ -36,9 +36,9 @@ We use `conda` to manage dependencies. If you have not installed `anaconda3` or 
 
 ## Evaluated VSSL models
 
-To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
+* To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
 
-Download those from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC), if not already downloaded. Unzip the downloaded file. This will create `checkpoints_pretraining/` folder which contains checkpoints for each of the methods used in the paper.
+<!-- * Download those from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC), if not already downloaded. Unzip the downloaded file. This will create `checkpoints_pretraining/` folder which contains checkpoints for each of the methods used in the paper. -->
 
 * Symlink the pre-trained models for initialization. Suppose all your VSSL pre-trained checkpoints are at `../checkpoints_pretraining`
     ```sh
