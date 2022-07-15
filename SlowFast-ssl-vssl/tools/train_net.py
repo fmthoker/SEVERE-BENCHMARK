@@ -196,6 +196,19 @@ def train_epoch(
                     },
                     global_step=data_size * cur_epoch + cur_iter,
                 )
+            
+            # log to wandb
+            if cfg.WANDB.ENABLE:
+                import wandb
+                wandb.log(
+                    {
+                        "Train/loss": loss,
+                        "Train/lr": lr,
+                        "Train/Top1_err": top1_err,
+                        "Train/Top5_err": top5_err,
+                    },
+                    step=data_size * cur_epoch + cur_iter,
+                )
 
         train_meter.iter_toc()  # measure allreduce for this meter
         train_meter.log_iter_stats(cur_epoch, cur_iter)
@@ -480,6 +493,13 @@ def train(cfg):
         writer = tb.TensorboardWriter(cfg)
     else:
         writer = None
+
+    # set up logging with W&B
+    if cfg.WANDB.ENABLE:
+        import wandb
+        wandb.init(project="slowfast-vssl", entity=cfg.WANDB.ENTITY, config=cfg)
+        wandb.watch(model)
+        wandb.watch(optimizer)
 
     # Perform the training loop.
     logger.info("Start epoch: {}".format(start_epoch + 1))

@@ -78,6 +78,11 @@ _C.TRAIN.CHECKPOINT_CLEAR_NAME_PATTERN = ()  # ("backbone.",)
 # If True, use FP16 for activations
 _C.TRAIN.MIXED_PRECISION = False
 
+# Wandb options
+_C.WANDB = CfgNode()
+_C.WANDB.ENABLE = False
+_C.WANDB.ENTITY = None
+
 # ---------------------------------------------------------------------------- #
 # Augmentation options.
 # ---------------------------------------------------------------------------- #

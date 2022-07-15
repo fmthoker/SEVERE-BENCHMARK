@@ -54,6 +54,15 @@ def parse_args():
         type=str,
     )
     parser.add_argument(
+        "--log2wandb",
+        action="store_true",
+        help="Log to wandb",
+    )
+    parser.add_argument(
+        "--wandb_entity",
+        help="wandb project to log to",
+    )
+    parser.add_argument(
         "opts",
         help="See slowfast/config/defaults.py for all options",
         default=None,
@@ -88,6 +97,22 @@ def load_config(args):
         cfg.RNG_SEED = args.rng_seed
     if hasattr(args, "output_dir"):
         cfg.OUTPUT_DIR = args.output_dir
+
+    if hasattr(args, "log2wandb"):
+        
+        try:
+            import wandb
+        except ImportError:
+            exit("Please install wandb using `pip install wandb`. Further, login to your account by `wandb login`.")
+
+        cfg.WANDB.ENABLE = args.log2wandb
+        
+        if args.log2wandb:
+            print("Logging to wandb")
+            print("WARNING: You need to pass wandb entity by --wandb_entity flag.")
+            
+            assert hasattr(args, "wandb_entity"), "Please pass wandb entity by --wandb_entity flag."
+            cfg.WANDB.ENTITY = args.wandb_entity
 
     # Create the checkpoint dir.
     cu.make_checkpoint_dir(cfg.OUTPUT_DIR)
