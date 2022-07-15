@@ -9,12 +9,11 @@ TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</in
 
 
 ## Overview of Experiments 
-
-Our comprehensive set of over 500 experiments encompasses 7 video datasets, 9 video self-supervised learning (VSSL) methods and 6 video understanding tasks.
+We evaluate 9 video self-supervised learning (VSSL) methods  on  7 video datasets  for 6 video understanding tasks.
 
 ### Evaluated VSSL models
 
-Below are the self-suprevised methods and the repositories that we evaluate.
+Below are the video self-suprevised methods  that we evaluate.
 
 | Model | URL |
 |-------|-----|
@@ -31,7 +30,7 @@ Below are the self-suprevised methods and the repositories that we evaluate.
 
 
 * For SeLaVi, MoCo, VideoMoCO, Pretext-Contrast, CtP, TCLR and GDT we use the Kinetics-400 pretrained R(2+1D)-18 weights provided by the Authors.
-* For RSPNet and AVID-CMA the author provided R(2+1D)-18 weights differ from the R(2+1D)-18 architecture defined in A Closer Look at Spatiotemporal Convolutions for Action Recognition. Thus we use the official implementation of the RSPNet and AVID-CMA and to pretrain with the common R(2+1D)-18 backbone on Kinetics-400 dataset.
+* For RSPNet and AVID-CMA the author provided R(2+1D)-18 weights differ from the R(2+1D)-18 architecture defined in ['A Closer Look at Spatiotemporal Convolutions for Action Recognition'](https://arxiv.org/abs/1711.11248). Thus we use the official implementation of the RSPNet and AVID-CMA and to pretrain with the common R(2+1D)-18 backbone on Kinetics-400 dataset.
 * For Supervised, We use the Kinetics-400 pretrained R(2+1D)-18 weights from the pytorch library.
 
 Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC). Unzip the downloaded file and it shall create a folder `checkpoints_pretraining/` with all weights.
@@ -42,7 +41,7 @@ We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
-We analyse whether features learned by self-supervised models transfer to datasets that vary in domain with respect to the pre-training dataset.
+We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF101 ](http://crcv.ucf.edu/data/UCF101.php),[Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something),[NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/),[Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/),etc) with respect to the pre-training dataset i.e. [Kinetics-400](https://arxiv.org/abs/1705.06950).
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
 
@@ -62,7 +61,7 @@ Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps t
 
 We study the sensitivity of video self-supervised methods to the downstream task and question whether self-supervised features can be used beyond action recognition.
 
-**In-domain tasks**: For task-shift on in-domain datasets, we use tasks such as repetition counting on UCF101.  Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
+**In-domain tasks**: For task-shift on in-domain datasets, we use tasks such as repetition counting on UCF101 which has .  Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
 
 **Out-of-domain tasks**: We use multi-label classification on Charades and action detection on AVA as examples of task-shift on domains far away from the standard UCF101. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments with tasks (a) action detection (AVA), (b) multi-label classification (Charades).
 
@@ -73,7 +72,7 @@ From our analysis we distill the SEVERE-benchmark, a subset of our experiments, 
 
 ### Citation
 
-If you use our work, kindly consider citing our paper:
+If you use our work or code, kindly consider citing our paper:
 ```
 @InProceedings{Thoker:2022:SEVERE:ECCV,
     author    = {Thoker, Fida and Doughty, Hazel and Bagad, Piyush and Snoek, Cees},
