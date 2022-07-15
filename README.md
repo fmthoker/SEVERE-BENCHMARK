@@ -41,19 +41,19 @@ We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
-We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF101 ](http://crcv.ucf.edu/data/UCF101.php),[Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something),[NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/),[Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/),etc) with respect to the pre-training dataset i.e. [Kinetics-400](https://arxiv.org/abs/1705.06950).
+We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF101 ](http://crcv.ucf.edu/data/UCF101.php), [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something), [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/), [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/), etc) with respect to the pre-training dataset i.e. [Kinetics-400](https://arxiv.org/abs/1705.06950).
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
 
 ### II. Downstream sample-sizes
 
-We evaluate the sensitivity of self-supervised methods to the number of downstream samples available for finetuning.
+We evaluate the sensitivity of self-supervised methods to the number of downstream samples available for finetuning on the above mentioned datasets.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream samples.
 
 ### III. Downstream action granularities
 
-We investigate whether self-supervised methods can learn fine-grained features required for recognizing semantically similar actions.
+We investigate whether self-supervised methods can learn fine-grained features required for recognizing semantically similar actions. We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.io/FineGym/) dataset.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream actions.
 
