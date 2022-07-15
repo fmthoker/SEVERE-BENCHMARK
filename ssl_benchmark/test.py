@@ -27,6 +27,7 @@ parser.add_argument('--distributed', action='store_true')
 parser.add_argument('--port', default='1234')
 parser.add_argument('--pretext-model-name', default='rspnet')
 parser.add_argument('--pretext-model-path', default=None)
+parser.add_argument('--finetune-ckpt-path', default='checkpoints/scratch/')
 
 def distribute_model_to_cuda(model, args, cfg):
     if torch.cuda.device_count() == 1:
