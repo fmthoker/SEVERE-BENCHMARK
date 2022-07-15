@@ -18,7 +18,10 @@ Evaluating self-supervised video representation models for Domain Shift, Sample 
 
 We recommend creating a `conda` environment and installing dependencies in it by using:
 ```bash
+conda create -n severe_env1 python=3.7
+conda activate severe_env1
 pip install -r requirements.txt 
+
 ```
 
 We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work but are not tested.
