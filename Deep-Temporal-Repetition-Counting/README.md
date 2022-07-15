@@ -19,6 +19,8 @@ This sub-repo is based on official implementation of ["Context-aware and Scale-i
 * Create a `conda` environment
 * Install dependencies
 ```sh
+conda create -n severe_env2 python=3.7
+conda activate severe_env2
 pip install -r requirements.txt 
 ```
 
