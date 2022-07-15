@@ -14,35 +14,35 @@ The registered object will be called with `obj(cfg)`.
 The call should return a `torch.nn.Module` object.
 """
 
-from slowfast.models.r2plus1d import R2Plus1D
-MODEL_REGISTRY._do_register("R2Plus1D", R2Plus1D)
+# from slowfast.models.r2plus1d import R2Plus1D
+# MODEL_REGISTRY._do_register("R2Plus1D", R2Plus1D)
 
-from slowfast.models.ctp import CTP
-MODEL_REGISTRY._do_register("CTP", CTP)
+# from slowfast.models.ctp import CTP
+# MODEL_REGISTRY._do_register("CTP", CTP)
 
-from slowfast.models.avid_cma import AVID_CMA
-MODEL_REGISTRY._do_register("AVID_CMA", AVID_CMA)
+# from slowfast.models.avid_cma import AVID_CMA
+# MODEL_REGISTRY._do_register("AVID_CMA", AVID_CMA)
 
-from slowfast.models.gdt import GDTBase
-MODEL_REGISTRY._do_register("GDTBase", GDTBase)
+# from slowfast.models.gdt import GDTBase
+# MODEL_REGISTRY._do_register("GDTBase", GDTBase)
 
-from slowfast.models.pretext_contrast import PretextContrast
-MODEL_REGISTRY._do_register("PretextContrast", PretextContrast)
+# from slowfast.models.pretext_contrast import PretextContrast
+# MODEL_REGISTRY._do_register("PretextContrast", PretextContrast)
 
-from slowfast.models.rspnet import RSPNet
-MODEL_REGISTRY._do_register("RSPNet", RSPNet)
+# from slowfast.models.rspnet import RSPNet
+# MODEL_REGISTRY._do_register("RSPNet", RSPNet)
 
-from slowfast.models.selavi import SELAVI
-MODEL_REGISTRY._do_register("SELAVI", SELAVI)
+# from slowfast.models.selavi import SELAVI
+# MODEL_REGISTRY._do_register("SELAVI", SELAVI)
 
-from slowfast.models.tclr import TCLR
-MODEL_REGISTRY._do_register("TCLR", TCLR)
+# from slowfast.models.tclr import TCLR
+# MODEL_REGISTRY._do_register("TCLR", TCLR)
 
-from slowfast.models.videomoco import VideoMoCo
-MODEL_REGISTRY._do_register("VideoMoCo", VideoMoCo)
+# from slowfast.models.videomoco import VideoMoCo
+# MODEL_REGISTRY._do_register("VideoMoCo", VideoMoCo)
 
-from slowfast.models.moco import MOCO
-MODEL_REGISTRY._do_register("MOCO", MOCO)
+# from slowfast.models.moco import MOCO
+# MODEL_REGISTRY._do_register("MOCO", MOCO)
 
 from slowfast.models.vssl import VSSL
 MODEL_REGISTRY._do_register("VSSL", VSSL)

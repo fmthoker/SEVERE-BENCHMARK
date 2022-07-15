@@ -21,6 +21,7 @@ from slowfast.datasets.mixup import MixUp
 from slowfast.models import build_model
 from slowfast.utils.meters import AVAMeter, EpochTimer, TrainMeter, ValMeter
 from slowfast.utils.multigrid import MultigridSchedule
+import slowfast.utils.distributed as du
 
 logger = logging.get_logger(__name__)
 
@@ -199,16 +200,17 @@ def train_epoch(
             
             # log to wandb
             if cfg.WANDB.ENABLE:
-                import wandb
-                wandb.log(
-                    {
-                        "Train/loss": loss,
-                        "Train/lr": lr,
-                        "Train/Top1_err": top1_err,
-                        "Train/Top5_err": top5_err,
-                    },
-                    step=data_size * cur_epoch + cur_iter,
-                )
+                if du.get_local_rank() == 0:
+                    import wandb
+                    wandb.log(
+                        {
+                            "Train/loss": loss,
+                            "Train/lr": lr,
+                            "Train/Top1_err": top1_err,
+                            "Train/Top5_err": top5_err,
+                        },
+                        step=data_size * cur_epoch + cur_iter,
+                    )
 
         train_meter.iter_toc()  # measure allreduce for this meter
         train_meter.log_iter_stats(cur_epoch, cur_iter)
@@ -443,6 +445,15 @@ def train(cfg):
     print(model)
     print("")
     
+    # set up logging with W&B
+    if cfg.WANDB.ENABLE:
+        # only log on master proc.
+        if du.get_local_rank() == 0:
+            print("Initializing W&B...")
+            import wandb
+            wandb.init(project="slowfast-vssl", entity=cfg.WANDB.ENTITY, config=cfg)
+            wandb.watch(model)
+    
     if du.is_master_proc() and cfg.LOG_MODEL_INFO:
         misc.log_model_info(model, cfg, use_train_input=True)
 
@@ -493,13 +504,6 @@ def train(cfg):
         writer = tb.TensorboardWriter(cfg)
     else:
         writer = None
-
-    # set up logging with W&B
-    if cfg.WANDB.ENABLE:
-        import wandb
-        wandb.init(project="slowfast-vssl", entity=cfg.WANDB.ENTITY, config=cfg)
-        wandb.watch(model)
-        wandb.watch(optimizer)
 
     # Perform the training loop.
     logger.info("Start epoch: {}".format(start_epoch + 1))

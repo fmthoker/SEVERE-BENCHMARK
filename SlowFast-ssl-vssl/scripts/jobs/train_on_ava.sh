@@ -4,13 +4,15 @@ repo="$( dirname $(dirname $parent))"
 export PYTHONPATH=$repo
 
 # get inputs from the user
-while getopts "c:n:b:d:o:" OPTION; do
+while getopts "c:n:b:d:o:w:e:" OPTION; do
     case $OPTION in
         c) cfg=$OPTARG;;
         n) num_gpus=$OPTARG;;
         b) batch_size=$OPTARG;;
         d) data_dir=$OPTARG;;
         o) base_output_dir=$OPTARG;;
+        w) wandb=$OPTARG;;
+        e) wandb_entity=$OPTARG;;
         *) exit 1 ;;
     esac
 done
@@ -41,6 +43,15 @@ fi
 # check data root directory
 if [ "$data_dir" ==  "" ];then
        data_dir=$repo/data/AVA
+fi
+
+# set wandb if not specified
+if [ "$wandb" ==  "" ];then
+       wandb=False
+fi
+
+if [ "$wandb_entity" ==  "" ];then
+       wandb_entity="bpiyush"
 fi
 
 # set num workers to be 2*num_gpus
@@ -80,6 +91,8 @@ echo ":: Repository: $repo"
 python -W ignore tools/run_net.py \
     --cfg $cfg \
     --init_method tcp://localhost:9998 \
+    WANDB.ENABLE $wandb \
+    WANDB.ENTITY $wandb_entity \
     NUM_GPUS $num_gpus \
     TRAIN.BATCH_SIZE $batch_size \
     DATA_LOADER.NUM_WORKERS $num_workers \

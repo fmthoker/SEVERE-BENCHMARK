@@ -100,11 +100,22 @@ bash download_annotations.sh
 
 ### Experiments <a class="anchor" id="expts-ava"></a>
 
+First, configure an output folder where all logs/checkpoints should be stored. For e.g., if you want to store all outputs at `/path/to/outputs/`, then symlink it:
+```sh
+ln -s /path/to/outputs/ outputs
+```
+
 We run all our experiments on AVA 2.2. To run fine-tuning on AVA, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh
 cfg=configs/AVA/VSSL/32x2_112x112_R18_v2.2_supervised.yaml
 bash scripts/jobs/train_on_ava.sh -c $cfg
 ```
+
+(Optional) **W&B logging**: If you want to enable logging training curves on [Weights and Biases](wandb.ai), use the following command:
+```sh
+bash scripts/jobs/train_on_ava.sh -c $cfg -w True -e <wandb_entity>
+```
+where replace `<wandb_entity>` by your W&B username. Note that you first need to create an account on [Weights and Biases](wandb.ai) and then login in your terminal via `wandb login`.
 
 You can check out other configs for fine-tuning with other video self-supervised methods. The configs for all pre-training methods is provided below:
 
@@ -149,6 +160,11 @@ bash download_annotations.sh
 ```
 
 ### Experiments <a class="anchor" id="expts-charades"></a>
+
+First, configure an output folder where all logs/checkpoints should be stored. For e.g., if you want to store all outputs at `/path/to/outputs/`, then symlink it:
+```sh
+ln -s /path/to/outputs/ outputs
+```
 
 To run fine-tuning on Charades, using `r2plus1d_18` backbone initialized from Kinetics-400 supervised pretraining, we use the following command(s):
 ```sh

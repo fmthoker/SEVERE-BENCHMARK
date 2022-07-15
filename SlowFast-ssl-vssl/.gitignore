@@ -2,6 +2,8 @@
 data/
 data
 checkpoints_pretraining
+outputs
+wandb
 
 # Python
 __pycache__/
