@@ -41,7 +41,7 @@ We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
-We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF101 ](http://crcv.ucf.edu/data/UCF101.php), [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something), [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/), [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/), etc) with respect to the pre-training dataset i.e. [Kinetics-400](https://arxiv.org/abs/1705.06950).
+We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF](http://crcv.ucf.edu/data/UCF101.php), [Something_something](https://developer.qualcomm.com/software/ai-datasets/something-something), [NTU](https://rose1.ntu.edu.sg/dataset/actionRecognition/), [Fine-Gym](https://sdolivia.github.io/FineGym/), etc) with respect to the pre-training dataset i.e. [Kinetics](https://arxiv.org/abs/1705.06950).
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
 
@@ -61,7 +61,7 @@ Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps t
 
 We study the sensitivity of video self-supervised methods to the downstream task and question whether self-supervised features can be used beyond action recognition.
 
-**In-domain tasks**: For task-shift on in-domain datasets, we use tasks such as repetition counting on UCF101 which has .  Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
+**In-domain tasks**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
 
 **Out-of-domain tasks**: We use multi-label classification on Charades and action detection on AVA as examples of task-shift on domains far away from the standard UCF101. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments with tasks (a) action detection (AVA), (b) multi-label classification (Charades).
 
