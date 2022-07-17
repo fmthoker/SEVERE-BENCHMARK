@@ -28,7 +28,7 @@ We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work
 
 ## Evaluated VSSL models
 
-* To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are downloaded as instructed in the [main README](../README.md).
+* To evaluate video self-supervised pre-training methods used in the paper, you need the pre-trained checkpoints for each method. We assume that these models are at  path `../checkpoints_pretraining/` as instructed in the [main README](../README.md).
 
 ## Dataset Preparation
 
