@@ -33,7 +33,7 @@ Below are the video self-suprevised methods  that we evaluate.
 * For RSPNet and AVID-CMA the author provided R(2+1D)-18 weights differ from the R(2+1D)-18 architecture defined in ['A Closer Look at Spatiotemporal Convolutions for Action Recognition'](https://arxiv.org/abs/1711.11248). Thus we use the official implementation of the RSPNet and AVID-CMA and to pretrain with the common R(2+1D)-18 backbone on Kinetics-400 dataset.
 * For Supervised, We use the Kinetics-400 pretrained R(2+1D)-18 weights from the pytorch library.
 
-Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC). Unzip the downloaded file and it shall create a folder `checkpoints_pretraining/` with all weights.
+Download Kinetics-400 pretrained R(2+1D)-18 weights for each method from [here](https://surfdrive.surf.nl/files/index.php/s/Zw9tbuOYAInzVQC). Unzip the downloaded file and it shall create a folder `checkpoints_pretraining/` with all the pretraining model weights.
 
 ## Experiments
 
@@ -66,7 +66,7 @@ We study the sensitivity of video self-supervised methods to nature of the downs
 
 **In-domain task shift**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
 
-**Out-of-domain task shift**: For task-shift as well as domain shift,  we evaluate on multi-label action classification on Charades and action detection on AVA. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments with tasks (a) action detection (AVA), (b) multi-label classification (Charades).
+**Out-of-domain task shift**: For task-shift as well as domain shift,  we evaluate on multi-label action classification on Charades and action detection on AVA. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments.
 
 ## The SEVERE Benchmark
 
