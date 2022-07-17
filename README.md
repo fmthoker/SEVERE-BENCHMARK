@@ -41,7 +41,9 @@ We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
+<!---
 We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF](http://crcv.ucf.edu/data/UCF101.php), [Something_something](https://developer.qualcomm.com/software/ai-datasets/something-something), [NTU](https://rose1.ntu.edu.sg/dataset/actionRecognition/), [Fine-Gym](https://sdolivia.github.io/FineGym/), etc) with respect to the pre-training dataset i.e. [Kinetics](https://arxiv.org/abs/1705.06950).
+-->
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
 
