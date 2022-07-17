@@ -41,31 +41,32 @@ We divide these downstream evaluations across four axes:
 
 ### I. Downstream domain-shift
 
-<!---
-We analyse whether features learned by self-supervised models transfer to datasets that vary in domain ([UCF](http://crcv.ucf.edu/data/UCF101.php), [Something_something](https://developer.qualcomm.com/software/ai-datasets/something-something), [NTU](https://rose1.ntu.edu.sg/dataset/actionRecognition/), [Fine-Gym](https://sdolivia.github.io/FineGym/), etc) with respect to the pre-training dataset i.e. [Kinetics](https://arxiv.org/abs/1705.06950).
--->
+We evaluate the sensitivity of self-supervised methods to the domain shift in downstream dataset  with respect to the pre-training dataset i.e. [Kinetics](https://arxiv.org/abs/1705.06950).
 
-Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain.
+Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain datasets like .
 
 ### II. Downstream sample-sizes
 
-We evaluate the sensitivity of self-supervised methods to the number of downstream samples available for finetuning on the above mentioned datasets.
+We evaluate the sensitivity of self-supervised methods to the amount of downstream samples available for finetuning.
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream samples.
 
 ### III. Downstream action granularities
 
-We investigate whether self-supervised methods can learn fine-grained features required for recognizing semantically similar actions. We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.io/FineGym/) dataset.
+We investigate whether self-supervised methods can learn fine-grained features required for recognizing semantically similar actions. 
+<!---
+We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.io/FineGym/) dataset.
+-->
 
 Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream actions.
 
 ### IV. Downstream task-shift
 
-We study the sensitivity of video self-supervised methods to the downstream task and question whether self-supervised features can be used beyond action recognition.
+We study the sensitivity of video self-supervised methods to nature of the downstream task. 
 
-**In-domain tasks**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
+**In-domain task shift**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
 
-**Out-of-domain tasks**: We use multi-label classification on Charades and action detection on AVA as examples of task-shift on domains far away from the standard UCF101. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments with tasks (a) action detection (AVA), (b) multi-label classification (Charades).
+**Out-of-domain task shift**: For task-shift as well as domain shift,  we evaluate on multi-label action classification on Charades and action detection on AVA. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments with tasks (a) action detection (AVA), (b) multi-label classification (Charades).
 
 ## The SEVERE Benchmark
 
