@@ -2,7 +2,7 @@
 We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.io/FineGym/) dataset.
 # Experiments on Action Recognition
 -->
-# I. Downstream Domain-shift  <br />  # II. Downstream Sample Sizes <br /> # III. Downstream Action granularities 
+# I. Downstream Domain-shift  <br />   II. Downstream Sample Sizes <br />  III. Downstream Action granularities 
 Evaluating self-supervised video representation models for the task of action recognition with varying  domains, training set sizes and fine-grained action labels. 
 
 ## Table of Contents
