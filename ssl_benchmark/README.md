@@ -5,7 +5,7 @@ We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.i
 # I. Downstream Domain-shift    
 # II. Downstream Sample Sizes 
 # III. Downstream Action granularities 
-Evaluating self-supervised video representation models for the task of action recognition with varying  domains, training sample Sizes and fine-grained action labels. 
+Evaluating self-supervised video representation models for the task of action recognition with varying  domains, training set sizes and fine-grained action labels. 
 
 ## Table of Contents
 
