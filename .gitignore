@@ -2,11 +2,12 @@
 */*__pycache__*
 */*.swp
 */*.pyc
-ssl_benchmark/checkpoints/*
-ssl_benchmark/logs_camera_ready/
+domain_shift_samples_action_granularity/checkpoints/*
+domain_shift_samples_action_granularity/logs_camera_ready/
 ssl_benchmark/out_*
 */*/*.pyc
 */*/*/*.pyc
 */*/*/*/*.pyc
 */*/*/*/*/*.pyc
 checkpoints_pretraining/*/*
+Repetition-Counting/data/results/
