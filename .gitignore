@@ -2,8 +2,8 @@
 */*__pycache__*
 */*.swp
 */*.pyc
-domain_shift_samples_action_granularity/checkpoints/*
-domain_shift_samples_action_granularity/logs_camera_ready/
+action_recognition/checkpoints/*
+action_recognition/logs_camera_ready/
 ssl_benchmark/out_*
 */*/*.pyc
 */*/*/*.pyc
