@@ -1,0 +1,20 @@
+# Data
+data/
+data
+checkpoints_pretraining
+outputs
+wandb
+
+# Python
+__pycache__/
+
+# Logs
+*.log
+detections_latest.csv
+groundtruth_latest.csv
+
+# checkpoints
+checkpoints/
+
+detectron2_repo/
+outputs/
