@@ -43,13 +43,13 @@ We divide these downstream evaluations across four axes:
 
 We evaluate the sensitivity of self-supervised methods to the domain shift in downstream dataset  with respect to the pre-training dataset i.e. [Kinetics](https://arxiv.org/abs/1705.06950).
 
-Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream domain datasets like .
+Please refer to [action_recognition/README.md](./action_recognition/README.md) for steps to reproduce the experiments with varying downstream domain datasets like .
 
 ### II. Downstream sample-sizes
 
 We evaluate the sensitivity of self-supervised methods to the amount of downstream samples available for finetuning.
 
-Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream samples.
+Please refer to [action_recognition/README.md](./action_recognition/README.md) for steps to reproduce the experiments with varying downstream samples.
 
 ### III. Downstream action granularities
 
@@ -58,7 +58,7 @@ We investigate whether self-supervised methods can learn fine-grained features r
 We evaluate on various subsets defined for  [Fine-Gym](https://sdolivia.github.io/FineGym/) dataset.
 -->
 
-Please refer to [ssl_benchmark/README.md](./ssl_benchmark/README.md) for steps to reproduce the experiments with varying downstream actions.
+Please refer to [action_recognition/README.md](./action_recognition/README.md) for steps to reproduce the experiments with varying downstream actions.
 
 ### IV. Downstream task-shift
 
