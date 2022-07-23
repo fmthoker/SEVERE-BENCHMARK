@@ -64,9 +64,9 @@ Please refer to [action_recognition/README.md](./action_recognition/README.md) f
 
 We study the sensitivity of video self-supervised methods to nature of the downstream task. 
 
-**In-domain task shift**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Deep-Temporal-Repetition-Counting/README.md](./Deep-Temporal-Repetition-Counting/README.md) for steps to reproduce experiments.
+**In-domain task shift**: For task-shift within-domain, we evaluate  the UCF dataset for the task of repetition counting. Please refer to [Repetition-Counting/README.md](./Repetition-Counting/README.md) for steps to reproduce experiments.
 
-**Out-of-domain task shift**: For task-shift as well as domain shift,  we evaluate on multi-label action classification on Charades and action detection on AVA. Please refer to [SlowFast-ssl-vssl/README.md](./SlowFast-ssl-vssl/README.md) for steps to reproduce the experiments.
+**Out-of-domain task shift**: For task-shift as well as domain shift,  we evaluate on multi-label action classification on Charades and action detection on AVA. Please refer to [action_detection_multi_label_classification/README.md](./action_detection_multi_label_classification/README.md) for steps to reproduce the experiments.
 
 ## The SEVERE Benchmark
 
