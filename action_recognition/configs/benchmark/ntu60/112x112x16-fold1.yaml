@@ -2,7 +2,7 @@ required_devices: 8
 resume: false
 
 no_test: false
-test_only: true
+test_only: false
 debug: false
 seed: 0
 distributed: false
@@ -10,10 +10,7 @@ test_freq: 5
 num_workers: 16
 
 benchmark:
-  #name: "ntu60-lin_eval_112X112x16"
-  #name: "ntu60-full_finetune"
-  #name: "ntu60-full_finetune_1000_examples"
-  name: "ntu60-full_finetune_16000_examples"
+  name: "ntu60-full_finetune"
 
 dataset:
   name: "ntu60"
@@ -26,7 +23,7 @@ dataset:
   min_area: 0.08
   normalize: true
   switch_channels: false
-  num_of_examples: 16000
+  num_of_examples: 0
   color: [0.4, 0.4, 0.4, 0.2]
   train:
     split: "trainlist{fold:02d}"
