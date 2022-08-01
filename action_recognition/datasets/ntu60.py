@@ -9,9 +9,7 @@ from datasets.video_db import VideoDataset
 import numpy as np
 import math
 
-#DATA_PATH = '/home/fthoker/ntu_rgbd_120_videos/original_videos'
-#ANNO_PATH = '/home/fthoker/ntu_rgbd_120_videos/ntu_60_annotations/ntu_60_cross_subject_TrainTestlist'
-DATA_PATH = '/ssdstore/fmthoker/ntu/original_videos'
+DATA_PATH = '/ssdstore/fmthoker/ntu/videos'
 ANNO_PATH = '/ssdstore/fmthoker/ntu/ntu_60_annotations/ntu_60_cross_subject_TrainTestlist'
 
 from datasets.utils import get_subset_data

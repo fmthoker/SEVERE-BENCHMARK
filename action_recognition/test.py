@@ -109,7 +109,6 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     logger.add_line('\n' + '=' * 30 + ' Final evaluation ' + '=' * 30)
     cfg['dataset']['test']['clips_per_video'] = 5  # Evaluate clip-level predictions with 25 clips per video for metric stability
     train_loader, test_loader, dense_loader = eval_utils.build_dataloaders(cfg['dataset'], fold, cfg['num_workers'], args.distributed, logger)
-    #top1, top5, mean_top1, mean_top5 = run_phase('test', test_loader, model, None, end_epoch, args, cfg, logger)
     top1_dense, top5_dense, mean_top1, mean_top5 = run_phase('test_dense', dense_loader, model, None, end_epoch, args, cfg, logger)
 
     logger.add_line('\n' + '=' * 30 + ' Evaluation done ' + '=' * 30)
@@ -128,9 +127,7 @@ def run_phase(phase, loader, model, optimizer, epoch, args, cfg, logger):
     data_time = metrics_utils.AverageMeter('Data', ':6.3f', window_size=100)
     loss_meter = metrics_utils.AverageMeter('Loss', ':.4e')
     top1_meter = metrics_utils.AverageMeter('Acc@1', ':6.2f')
-    # mean_top1_meter = metrics_utils.AverageMeter('Acc@1', ':6.2f')
     top5_meter = metrics_utils.AverageMeter('Acc@5', ':6.2f')
-    # mean_top5_meter = metrics_utils.AverageMeter('Acc@1', ':6.2f')
     progress = utils.logger.ProgressMeter(len(loader), meters=[batch_time, data_time, loss_meter, top1_meter, top5_meter],
                                           phase=phase, epoch=epoch, logger=logger)
 

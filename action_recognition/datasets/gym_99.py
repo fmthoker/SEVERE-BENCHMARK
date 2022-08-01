@@ -10,7 +10,7 @@ import os
 import numpy as np
 import math
 
-DATA_PATH = '/local-ssd/fmthoker/gym/subactions'
+DATA_PATH = '/local-ssd/fmthoker/gym/videos'
 ANNO_PATH = '/local-ssd/fmthoker/gym/annotations'
 
 from datasets.utils import get_subset_data

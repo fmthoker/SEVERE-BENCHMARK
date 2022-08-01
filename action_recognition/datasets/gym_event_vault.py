@@ -8,7 +8,7 @@
 from datasets.video_db import VideoDataset
 import os
 
-DATA_PATH = '/ssdstore/fmthoker/gym/subactions'
+DATA_PATH = '/local-ssd/fmthoker/gym/videos'
 ANNO_PATH = '/ssdstore/fmthoker/gym/annotations'
 
 

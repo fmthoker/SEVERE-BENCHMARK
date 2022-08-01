@@ -13,8 +13,8 @@ import json
 import numpy as np
 import math
 
-DATA_PATH = '/local-ssd/fmthoker/20bn-something-something-v2/something-something-v2-videos_avi'
-ANNO_PATH = '/local-ssd/fmthoker/20bn-something-something-v2/something-something-v2-annotations/'
+DATA_PATH = '/local-ssd/fmthoker/smth-smth-v2/something-something-v2-videos_avi'
+ANNO_PATH = '/local-ssd/fmthoker/smth-smth-v2/something-something-v2-annotations/'
 
 
 

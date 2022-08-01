@@ -76,7 +76,7 @@ The expected directory hierarchy is as follow:-->
 │   │   │   ├── something-something-v2-train.json
 │   │   │   └── something-something-v2-validation.json
 │   │   │       
-│   │   └── 20bn-something-something-v2
+│   │   └── something-something-v2-videos_avi
 │   │       └── *.avi
 │   │          
 │   ├──ntu60
