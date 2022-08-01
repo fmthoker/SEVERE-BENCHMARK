@@ -3,6 +3,7 @@
 */*.swp
 */*.pyc
 action_recognition/checkpoints/*
+action_recognition/checkpoints_prev/*
 action_recognition/logs_camera_ready/
 ssl_benchmark/out_*
 */*/*.pyc
