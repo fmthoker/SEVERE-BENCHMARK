@@ -112,7 +112,7 @@ Below, we run experiments for domain-shift, sample-sizes and fine-grained action
 
 ### I. Downstream domain-shift
 
-* For finetuning pretrained models on domain shift datasets (e.g `something_something_v2`, `gym_99`, etc) use training scripts in  [./scripts_domain_shift/](./scripts_domain_shift/)
+* For finetuning pretrained models on domain shift datasets (e.g `something_something_v2`, `gym_99`, etc) use training scripts in  [./scripts_domain_shift/](./scripts_domain_shift/).
 ```bash
 # Example finetuning pretrained  gdt model on something-something-v2 
 
@@ -125,7 +125,7 @@ python test.py  configs/benchmark/something/112x112x32.yaml  --pretext-model-nam
 
 ### II. Downstream sample-sizes
 
-* For finetuning pretrained models with different sample sizes use training scripts in  `./scripts_sample_sizes`
+* For finetuning pretrained models with different sample sizes use training scripts in  [./scripts_sample_sizes](./scripts_sample_sizes).
 
 ```bash
 # Example finetuning pretrained  video_moco model with 1000 ucf101 examples  
@@ -143,7 +143,7 @@ python test.py configs/benchmark/ucf/112x112x32-fold1_1000_examples.yaml   --pre
 
 For this, we use the FineGym dataset that comes with a hierarchicy of actions.
 
-* For finetuning pretrained models with different Fine-gym granularities (e.g `gym_event_vault`, `gym_set_FX_S1`, `gym288`, etc) use training scripts in  `./scripts_finegym_actions`
+* For finetuning pretrained models with different Fine-gym granularities (e.g `gym_event_vault`, `gym_set_FX_S1`, `gym288`, etc) use training scripts in  [./scripts_finegym_actions](./scripts_finegym_actions).
 
 ```bash
 # Example finetuning pretrained  fully_supervised_kinetics model on set FX_S1  granularity
@@ -158,7 +158,7 @@ python test.py configs/benchmark/gym_set_FX_S1/112x112x32.yaml   --pretext-model
 
 ### Linear Evaluation 
 
-* For evaluating pretrained models using linear evaluation on UCF-101 or Kinetics-400  use training scripts in  `./scripts_linear_evaluation`
+* For evaluating pretrained models using linear evaluation on UCF-101 or Kinetics-400  use training scripts in  [./scripts_linear_evaluation](./scripts_linear_evaluation).
 
 ```bash
 # Example linear evaluation on UCF-101
