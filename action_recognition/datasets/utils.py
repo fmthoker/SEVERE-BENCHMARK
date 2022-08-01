@@ -2,10 +2,10 @@
 import math
 import numpy as np
 
-#seed = 99999
+# change seed to pick up  a different subset of  random samples
+seed = 99999
 #seed = 12345
-seed = 19
-
+#seed = 19
 def get_subset_data(video_names,annotations,num_of_examples):
 
     examples_per_class =   int(math.ceil(num_of_examples / len(set(annotations))))  

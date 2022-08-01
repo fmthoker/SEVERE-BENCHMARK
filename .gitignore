@@ -11,5 +11,5 @@ ssl_benchmark/out_*
 */*/*/*/*.pyc
 */*/*/*/*/*.pyc
 checkpoints_pretraining/*/*
-Repetition-Counting/data/results/
+Repetition-Counting/data/results/*
 checkpoints_pretraining_bkp/
