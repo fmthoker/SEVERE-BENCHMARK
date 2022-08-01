@@ -26,6 +26,7 @@ parser.add_argument('--port', default='1234')
 parser.add_argument('--seed', default='0')
 parser.add_argument('--pretext-model-name', default='scratch')
 parser.add_argument('--pretext-model-path', default=None)
+parser.add_argument('--finetune-ckpt-path', default='checkpoints/scratch/')
 
 def distribute_model_to_cuda(model, args, cfg):
     if torch.cuda.device_count() == 1:
@@ -82,7 +83,7 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     model, ckp_manager = get_model( cfg, eval_dir, args, logger) 
 
     # freeze backbone
-    model = utils.eval_utils.freeze_backbone(model,args.pretext_model)
+    model = utils.eval_utils.freeze_backbone(model)
 
     # Log model description
     logger.add_line("=" * 30 + "   Parameters   " + "=" * 30)

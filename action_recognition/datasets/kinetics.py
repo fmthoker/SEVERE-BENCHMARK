@@ -10,9 +10,8 @@ import glob
 import numpy as np
 
 
-#DATA_PATH = '/data/datasets/kinetics/'
-DATA_PATH = '/ssdstore/fmthoker/kinetics/VideoData'
-ANNO_PATH = '/ssdstore/fmthoker/kinetics/labels'
+DATA_PATH = '/local-ssd/fmthoker/kinetics/VideoData'
+ANNO_PATH = '/local-ssd/fmthoker/kinetics/labels'
 
 
 from datasets.video_db import VideoDataset

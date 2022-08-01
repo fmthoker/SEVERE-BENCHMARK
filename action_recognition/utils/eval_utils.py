@@ -23,7 +23,7 @@ def parameter_description(model):
             ' x '.join([str(s) for s in p.size()]), str(np.prod(p.size())))
     return desc
 
-def freeze_backbone(model,pretext_model):
+def freeze_backbone(model):
 
     for n, p in model.named_parameters():
         if 'fc' in n:

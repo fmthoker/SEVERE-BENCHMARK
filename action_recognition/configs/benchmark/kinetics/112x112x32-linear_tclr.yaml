@@ -24,6 +24,7 @@ dataset:
   color: [0.4, 0.4, 0.4, 0.2]
   switch_channels: true
   normalize: false
+  num_of_examples: 0
   train:
     split: "trainlist{fold:02d}"
     mode: "clip"
