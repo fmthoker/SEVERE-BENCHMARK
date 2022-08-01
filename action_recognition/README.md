@@ -112,7 +112,7 @@ Below, we run experiments for domain-shift, sample-sizes and fine-grained action
 
 ### I. Downstream domain-shift
 
-* For finetuning pretrained models on domain shift datasets (e.g `something_something_v2`, `gym_99`, etc) use training scripts in  `./scripts_domain_shift/`
+* For finetuning pretrained models on domain shift datasets (e.g `something_something_v2`, `gym_99`, etc) use training scripts in  [./scripts_domain_shift/](./scripts_domain_shift/)
 ```bash
 # Example finetuning pretrained  gdt model on something-something-v2 
 
