@@ -15,7 +15,6 @@ python finetune.py configs/benchmark/gym_event_vault/112x112x32.yaml   --pretext
 
 python finetune.py configs/benchmark/gym_event_vault/112x112x32.yaml   --pretext-model-name  rspnet --pretext-model-path ../checkpoints_pretraining/rspnet/snellius_checkpoint_epoch_200.pth.tar --seed 100
 
-
 python finetune.py configs/benchmark/gym_event_vault/112x112x32_tclr.yaml   --pretext-model-name  tclr --pretext-model-path ../checkpoints_pretraining/tclr/rpd18kin400.pth --seed 100
 
 python finetune.py configs/benchmark/gym_event_vault/112x112x32.yaml   --pretext-model-name  ctp --pretext-model-path ../checkpoints_pretraining/ctp/snellius_r2p1d18_ctp_k400_epoch_90.pth --seed 100
