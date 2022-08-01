@@ -42,10 +42,12 @@ The datasets can be downloaded from the following links:
 * [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
 * For [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/) please send a request to Fine-Gym authors via [Form](https://docs.google.com/forms/d/e/1FAIpQLScg8KDmBl0oKc7FbBedT0UJJHxpBHQmgsKpc4nWo4dwdVJi0A/viewform) to get access to the dataset. After downloading the videos, follow  the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to trim the videos to subactions. (Note, if you also dowload the videos via [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) script some of the video will be  missing because of the broken youtube links, so we suggest to request the Fine-Gym authors to get access to whole dataset). Please contact us in case of any issues.
 
-* We provide the annoations that we use for each dataset in the ./data/ directory:
-* The expected directory hierarchy is as follow:
+* We provide the annoations that we use for each dataset in the ./data/ directory.
+<!---
+The expected directory hierarchy is as follow:-->
+* We expect a directory hierarchy as below. After downloading the datasets from the original sources, please update the data and annotation paths for each dataset in the respective dataloader scripts e.g datasets/ucf.py, datasets/something.py, datasets/gym_99.py, etc. 
 ```
-├── data
+├── datasets_root
 │   ├──ucf101
 │   │   ├── ucfTrainTestlist
 │   │   │   ├── classInd.txt

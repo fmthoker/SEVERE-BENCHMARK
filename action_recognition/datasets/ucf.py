@@ -11,8 +11,6 @@ import math
 
 DATA_PATH = '/local-ssd/fmthoker/ucf101/UCF-101'
 ANNO_PATH = '/local-ssd/fmthoker/ucf101/ucfTrainTestlist'
-#DATA_PATH = '/home/fthoker/ucf101/UCF-101'
-#ANNO_PATH = '/home/fthoker/ucf101/ucfTrainTestlist'
 
 from datasets.utils import get_subset_data
 
