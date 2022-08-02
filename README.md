@@ -5,7 +5,12 @@ Self-Supervised Learning?](https://arxiv.org/abs/2203.14221)
 
 TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</ins>o <ins>RE</ins>presentations) benchmark for evaluating the generalizability of representations obtained by existing and future self-supervised video learning methods.
 
+<--
 ![](./media/concept_figure.png)
+-->
+
+![image](https://user-images.githubusercontent.com/19412343/182300678-bdb55c4a-891c-4a4d-9589-93bdba0b572a.png)
+
 
 
 ## Overview of Experiments 
