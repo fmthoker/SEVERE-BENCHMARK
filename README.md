@@ -77,7 +77,7 @@ From our analysis we distill the SEVERE-benchmark, a subset of our experiments, 
 
 If you use our work or code, kindly consider citing our paper:
 ```
-@article{thoker2022severe,
+@inproceedings{thoker2022severe,
   author    = {Thoker, Fida Mohammad and Doughty, Hazel and Bagad, Piyush and Snoek, Cees},
   title     = {How Severe is Benchmark-Sensitivity in Video Self-Supervised Learning?},
   journal   = {ECCV},
