@@ -1,7 +1,7 @@
 # SEVERE Benchmark
 
 Official code for our ECCV 2022 paper [How Severe is Benchmark-Sensitivity in Video
-Self-Supervised Learning?](https://arxiv.org/abs/2203.14221)
+Self-Supervised Learning?](https://bpiyush.github.io/SEVERE-website/)
 
 TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</ins>o <ins>RE</ins>presentations) benchmark for evaluating the generalizability of representations obtained by existing and future self-supervised video learning methods.
 
