@@ -5,7 +5,7 @@ Self-Supervised Learning?](https://bpiyush.github.io/SEVERE-website/)
 
 TL;DR. We propose the SEVERE (<ins>SE</ins>nsitivity of <ins>V</ins>id<ins>E</ins>o <ins>RE</ins>presentations) benchmark for evaluating the generalizability of representations obtained by existing and future self-supervised video learning methods.
 
-![](./media/concept_figure.png)
+![](./media/severe-teaser-2.gif)
 
 
 ## Overview of Experiments 
@@ -77,13 +77,11 @@ From our analysis we distill the SEVERE-benchmark, a subset of our experiments, 
 
 If you use our work or code, kindly consider citing our paper:
 ```
-@InProceedings{Thoker:2022:SEVERE:ECCV,
-    author    = {Thoker, Fida and Doughty, Hazel and Bagad, Piyush and Snoek, Cees},
-    title     = {How Severe is Benchmark-Sensitivity in Video Self-Supervised Learning?},
-    booktitle = {European Conference on Computer Vision (ECCV)},
-    month     = {October},
-    year      = {2022},
-    pages     = {-}
+@inproceedings{thoker2022severe,
+  author    = {Thoker, Fida Mohammad and Doughty, Hazel and Bagad, Piyush and Snoek, Cees},
+  title     = {How Severe is Benchmark-Sensitivity in Video Self-Supervised Learning?},
+  journal   = {ECCV},
+  year      = {2022},
 }
 ```
 
