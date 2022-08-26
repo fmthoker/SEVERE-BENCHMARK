@@ -188,5 +188,6 @@ For other VSSL models, please check other configs in `configs/Charades/VSSL/`.
 
 ## FAQs
 
-1. I want to evaluate on the validation set after each training epoch. How do I do that?
+1. I want to evaluate on the validation set after each training epoch. How do I do that? 
+
 A. In the config file, under the `TRAIN` section, change the value to `EVAL_EPOCH: 1`.
