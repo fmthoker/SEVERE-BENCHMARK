@@ -185,3 +185,8 @@ For other VSSL models, please check other configs in `configs/Charades/VSSL/`.
 :warning: Note that, on Charades, we obtain all our results using 1 GPU (NVIDIA RTX A600, 48GBs each) and a batch size of 16.
 
 :hourglass: Each experiment takes about 8 hours to run on the suggested configuration.
+
+## FAQs
+
+1. I want to evaluate on the validation set after each training epoch. How do I do that?
+A. In the config file, under the `TRAIN` section, change the value to `EVAL_EPOCH: 1`.
