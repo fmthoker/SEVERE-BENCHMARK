@@ -2,7 +2,7 @@ required_devices: 8
 resume: false
 
 no_test: false
-test_only: false
+test_only: true
 debug: false
 seed: 0
 distributed: false

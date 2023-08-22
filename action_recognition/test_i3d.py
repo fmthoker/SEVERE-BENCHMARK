@@ -29,6 +29,7 @@ parser.add_argument('--backbone', default='r2plus1d_18')
 parser.add_argument('--pretext-model-name', default='rspnet')
 parser.add_argument('--pretext-model-path', default=None)
 parser.add_argument('--finetune-ckpt-path', default='checkpoints/scratch/')
+parser.add_argument('--dropout', default=0.0, type=float)
 
 def distribute_model_to_cuda(model, args, cfg):
     if torch.cuda.device_count() == 1:
@@ -43,14 +44,30 @@ def distribute_model_to_cuda(model, args, cfg):
         model = torch.nn.DataParallel(model).cuda()
     return model
 
-def get_model( cfg, eval_dir, args, logger):
+def get_model( cfg, eval_dir, args, logger, num_classes):
 
-    from backbones import load_backbone
 
+    from i3d import I3D
     ckp_manager = eval_utils.CheckpointManager(eval_dir, rank=args.gpu)
 
-    model = load_backbone(args.backbone, args.pretext_model_name,args.pretext_model_path)
-    #model = load_backbone("r2plus1d_18", args.pretext_model_name,args.pretext_model_path)
+    model = I3D(num_classes=num_classes, dropout_prob=args.dropout, with_classifier=True)
+
+    ckpt = torch.load(args.pretext_model_path, map_location=torch.device("cpu"))
+    state_dict = ckpt["state_dict"]
+    #print("state_dict",csd.keys())
+
+    for k in list(state_dict.keys()):
+                # retain only encoder_q up to before the embedding layer
+                if k.startswith('backbone.') and not k.startswith('key_encoder'):
+                    # remove prefix
+                    state_dict[k[len("backbone."):]] = state_dict[k]
+                # delete renamed or unused k
+                del state_dict[k]
+    
+    
+    msg = model.load_state_dict(state_dict, strict=False)
+    logger.add_line("Loaded checkpoint from '{}' ".format(args.pretext_model_path))
+    print("Message", msg)
 
     return model, ckp_manager
 
@@ -82,9 +99,9 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     eval_dir, logger = eval_utils.prepare_environment(args, cfg, fold)
 
     # create pretext model
-    model, ckp_manager = get_model( cfg, eval_dir, args, logger) 
+    model, ckp_manager = get_model( cfg, eval_dir, args, logger, cfg['model']['args']['n_classes']) 
     # modify last layer with specific number of classes
-    model.fc = nn.Linear(cfg['model']['args']['feat_dim'], cfg['model']['args']['n_classes'])
+    #model.fc = nn.Linear(cfg['model']['args']['feat_dim'], cfg['model']['args']['n_classes'])
 
     # Log model description
     logger.add_line("=" * 30 + "   Parameters   " + "=" * 30)

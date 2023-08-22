@@ -2,7 +2,7 @@ required_devices: 8
 resume: false
 
 no_test: false
-test_only: false
+test_only: true
 debug: false
 seed: 0
 distributed: false
@@ -10,10 +10,10 @@ test_freq: 5
 num_workers: 16
 
 benchmark:
-  name: "gym_set-full_finetune_FX_S1_112X112x32"
+  name: "gym99-full_finetune_112X112x32_1000_examples"
 
 dataset:
-  name: "gym_set_fx_s1"
+  name: "gym99"
   fold: 1
   batch_size: 32
   clip_duration: 2.0
@@ -23,7 +23,7 @@ dataset:
   min_area: 0.08
   normalize: true
   switch_channels: false
-  num_of_examples: 0
+  num_of_examples: 1000
   color: [0.4, 0.4, 0.4, 0.2]
   train:
     split: "trainlist{fold:02d}"
@@ -35,7 +35,7 @@ dataset:
   test:
     split: "testlist{fold:02d}"
     mode: "clip"
-    clips_per_video: 5
+    clips_per_video: 3
     use_augmentation: false
     use_shuffle: false
     drop_last: false
@@ -56,9 +56,9 @@ optimizer:
     name: "multistep"
     base_lr: 0.0001
     gamma: 0.3
-    milestones: [7, 12, 16]
+    milestones: [8, 13, 16]
 
 model:
   args:
-    n_classes: 11
+    n_classes: 99
     feat_dim: 512

@@ -1,9 +1,11 @@
+
 # Copyright (c) Facebook, Inc. and its affiliates.
 # All rights reserved.
 #
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 #
+
 import argparse
 import time
 import yaml
@@ -14,8 +16,6 @@ import utils.logger
 from utils import main_utils, eval_utils
 import torch.multiprocessing as mp
 
-# from utils.debug import debug
-
 
 parser = argparse.ArgumentParser(description='Evaluation on ESC Sound Classification')
 parser.add_argument('cfg', metavar='CFG', help='config file')
@@ -25,10 +25,12 @@ parser.add_argument('--test-only', action='store_true')
 parser.add_argument('--resume', action='store_true')
 parser.add_argument('--distributed', action='store_true')
 parser.add_argument('--port', default='1234')
+parser.add_argument('--seed', default='0')
 parser.add_argument('--backbone', default='r2plus1d_18')
-parser.add_argument('--pretext-model-name', default='rspnet')
+parser.add_argument('--pretext-model-name', default='scratch')
 parser.add_argument('--pretext-model-path', default=None)
 parser.add_argument('--finetune-ckpt-path', default='checkpoints/scratch/')
+parser.add_argument('--dropout', default=0.0, type=float)
 
 def distribute_model_to_cuda(model, args, cfg):
     if torch.cuda.device_count() == 1:
@@ -43,14 +45,29 @@ def distribute_model_to_cuda(model, args, cfg):
         model = torch.nn.DataParallel(model).cuda()
     return model
 
-def get_model( cfg, eval_dir, args, logger):
+def get_model( cfg, eval_dir, args, logger, num_classes):
 
-    from backbones import load_backbone
-
+    from i3d import I3D
     ckp_manager = eval_utils.CheckpointManager(eval_dir, rank=args.gpu)
 
-    model = load_backbone(args.backbone, args.pretext_model_name,args.pretext_model_path)
-    #model = load_backbone("r2plus1d_18", args.pretext_model_name,args.pretext_model_path)
+    model = I3D(num_classes=num_classes, dropout_prob=args.dropout, with_classifier=True)
+
+    ckpt = torch.load(args.pretext_model_path, map_location=torch.device("cpu"))
+    state_dict = ckpt["state_dict"]
+    #print("state_dict",csd.keys())
+
+    for k in list(state_dict.keys()):
+                # retain only encoder_q up to before the embedding layer
+                if k.startswith('backbone.') and not k.startswith('key_encoder'):
+                    # remove prefix
+                    state_dict[k[len("backbone."):]] = state_dict[k]
+                # delete renamed or unused k
+                del state_dict[k]
+    
+    
+    msg = model.load_state_dict(state_dict, strict=False)
+    logger.add_line("Loaded checkpoint from '{}' ".format(args.pretext_model_path))
+    print("Message", msg)
 
     return model, ckp_manager
 
@@ -59,7 +76,6 @@ def main():
     ngpus = torch.cuda.device_count()
     args = parser.parse_args()
     cfg = yaml.safe_load(open(args.cfg))
-
     if args.test_only:
         cfg['test_only'] = True
     if args.resume:
@@ -67,6 +83,8 @@ def main():
     if args.debug:
         cfg['num_workers'] = 1
         cfg['dataset']['batch_size'] = 4
+
+    torch.manual_seed(args.seed)
 
     if args.distributed:
         mp.spawn(main_worker, nprocs=ngpus, args=(ngpus, cfg['dataset']['fold'], args, cfg))
@@ -82,11 +100,12 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     eval_dir, logger = eval_utils.prepare_environment(args, cfg, fold)
 
     # create pretext model
-    model, ckp_manager = get_model( cfg, eval_dir, args, logger) 
+    model, ckp_manager = get_model( cfg, eval_dir, args, logger, cfg['model']['args']['n_classes']) 
     # modify last layer with specific number of classes
-    model.fc = nn.Linear(cfg['model']['args']['feat_dim'], cfg['model']['args']['n_classes'])
+    #model.fc = nn.Linear(cfg['model']['args']['feat_dim'], cfg['model']['args']['n_classes'])
 
     # Log model description
+    print(model)
     logger.add_line("=" * 30 + "   Parameters   " + "=" * 30)
     logger.add_line(eval_utils.parameter_description(model))
 
@@ -100,27 +119,54 @@ def main_worker(gpu, ngpus, fold, args, cfg):
     # Distribute
     model = distribute_model_to_cuda(model, args, cfg)
 
-    start_epoch, end_epoch = 0, cfg['optimizer']['num_epochs']
     ################################ Test only ################################
     if cfg['test_only']:
         start_epoch = ckp_manager.restore(model, optimizer, scheduler, restore_best=True)
-        #start_epoch = ckp_manager.restore(model, optimizer, scheduler, restore_last=True)
         logger.add_line("Loaded checkpoint '{}' (epoch {})".format(ckp_manager.best_checkpoint_fn(), start_epoch))
 
-    ################################ Eval ################################
-    logger.add_line('\n' + '=' * 30 + ' Final evaluation ' + '=' * 30)
-    cfg['dataset']['test']['clips_per_video'] = 5  # Evaluate clip-level predictions with 25 clips per video for metric stability
-    train_loader, test_loader, dense_loader = eval_utils.build_dataloaders(cfg['dataset'], fold, cfg['num_workers'], args.distributed, logger)
-    top1_dense, top5_dense, mean_top1, mean_top5 = run_phase('test_dense', dense_loader, model, None, end_epoch, args, cfg, logger)
+    ################################ Train ################################
+    start_epoch, end_epoch = 0, cfg['optimizer']['num_epochs']
+    if cfg['resume'] and ckp_manager.checkpoint_exists(last=True):
+        start_epoch = ckp_manager.restore(model, optimizer, scheduler, restore_last=True)
+        logger.add_line("Loaded checkpoint '{}' (epoch {})".format(ckp_manager.last_checkpoint_fn(), start_epoch))
 
-    logger.add_line('\n' + '=' * 30 + ' Evaluation done ' + '=' * 30)
-    #logger.add_line('Clip@1: {:6.2f}'.format(top1))
-    #logger.add_line('Clip@5: {:6.2f}'.format(top5))
+    if not cfg['test_only']:
+        logger.add_line("=" * 30 + "   Training   " + "=" * 30)
 
-    logger.add_line('Video@1: {:6.2f}'.format(top1_dense))
-    logger.add_line('Video@MeanTop1: {:6.2f}'.format(mean_top1))
-    logger.add_line('Video@5: {:6.2f}'.format(top5_dense))
-    logger.add_line('Video@MeanTop5: {:6.2f}'.format(mean_top5))
+        # Main training loop
+        for epoch in range(start_epoch, end_epoch):
+            if args.distributed:
+                train_loader.sampler.set_epoch(epoch)
+                test_loader.sampler.set_epoch(epoch)
+
+            logger.add_line('='*30 + ' Epoch {} '.format(epoch) + '='*30)
+            logger.add_line('LR: {}'.format(scheduler._last_lr))
+            run_phase('train', train_loader, model, optimizer, epoch, args, cfg, logger)
+            top1, _ = run_phase('test', test_loader, model, None, epoch, args, cfg, logger)
+            ckp_manager.save(model, optimizer, scheduler, epoch, eval_metric=top1)
+            scheduler.step(epoch=None)
+
+
+        ############################ Eval ################################
+        logger.add_line('\n' + '=' * 30 + ' Final evaluation ' + '=' * 30)
+        top1_dense, top5_dense = run_phase('test_dense', dense_loader, model, None, end_epoch, args, cfg, logger)
+        logger.add_line('Video@1: {:6.2f}'.format(top1_dense))
+        logger.add_line('Video@5: {:6.2f}'.format(top5_dense))
+
+    ############################ Eval ################################
+    if cfg['test_only']:
+
+            logger.add_line('\n' + '=' * 30 + ' Final evaluation ' + '=' * 30)
+            cfg['dataset']['test']['clips_per_video'] = 5  # Evaluate clip-level predictions with 25 clips per video for metric stability
+            train_loader, test_loader, dense_loader = eval_utils.build_dataloaders(cfg['dataset'], fold, cfg['num_workers'], args.distributed, logger)
+            top1, top5 = run_phase('test', test_loader, model, None, end_epoch, args, cfg, logger)
+            top1_dense, top5_dense = run_phase('test_dense', dense_loader, model, None, end_epoch, args, cfg, logger)
+
+            logger.add_line('\n' + '=' * 30 + ' Evaluation done ' + '=' * 30)
+            logger.add_line('Clip@1: {:6.2f}'.format(top1))
+            logger.add_line('Clip@5: {:6.2f}'.format(top5))
+            logger.add_line('Video@1: {:6.2f}'.format(top1_dense))
+            logger.add_line('Video@5: {:6.2f}'.format(top5_dense))
 
 
 def run_phase(phase, loader, model, optimizer, epoch, args, cfg, logger):
@@ -143,11 +189,6 @@ def run_phase(phase, loader, model, optimizer, epoch, args, cfg, logger):
 
     end = time.time()
     logger.add_line('\n{}: Epoch {}'.format(phase, epoch))
-
-    # collect all predictions and targets
-    all_outputs = []
-    all_targets = []
-
     for it, sample in enumerate(loader):
         data_time.update(time.time() - end)
 
@@ -174,14 +215,9 @@ def run_phase(phase, loader, model, optimizer, epoch, args, cfg, logger):
             confidence = softmax(logits).view(batch_size, clips_per_sample, -1).mean(1)
             labels_tiled = target.unsqueeze(1).repeat(1, clips_per_sample).view(-1)
             loss = criterion(logits, labels_tiled)
-            #print(confidence.size(),labels_tiled.size())
         else:
             confidence = softmax(logits)
             loss = criterion(logits, target)
-        #print(confidence.size(),target.size())
-        
-        all_outputs.append(confidence)
-        all_targets.append(target)
 
         with torch.no_grad():
             acc1, acc5 = metrics_utils.accuracy(confidence, target, topk=(1, 5))
@@ -201,32 +237,12 @@ def run_phase(phase, loader, model, optimizer, epoch, args, cfg, logger):
 
         if (it + 1) % 100 == 0 or it == 0 or it + 1 == len(loader):
             progress.display(it+1)
-    
-    all_outputs = torch.cat(all_outputs)
-    all_targets = torch.cat(all_targets)
-    classes = all_targets.unique()
-    classes = torch.arange(cfg['model']['args']['n_classes'])
-
-    classwise_top1 = [0 for c in classes]
-    classwise_top5 = [0 for c in classes]
-    for c in classes:
-        indices = all_targets == c
-        if indices.any():
-               mean_top1, mean_top5 = metrics_utils.accuracy(all_outputs[indices], all_targets[indices], topk=(1, 5)) 
-               classwise_top1[c] = mean_top1
-               classwise_top5[c] = mean_top5
-        else: 
-               classwise_top1[c] = torch.tensor([0.0]).cuda()
-               classwise_top5[c] = torch.tensor([0.0]).cuda()
-
-    classwise_top1 = torch.cat(classwise_top1).mean()
-    classwise_top5 = torch.cat(classwise_top5).mean()
 
     if args.distributed:
         progress.synchronize_meters(args.gpu)
         progress.display(len(loader) * args.world_size)
 
-    return top1_meter.avg, top5_meter.avg, classwise_top1, classwise_top5
+    return top1_meter.avg, top5_meter.avg
 
 
 if __name__ == '__main__':

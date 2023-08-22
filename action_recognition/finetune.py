@@ -25,6 +25,7 @@ parser.add_argument('--resume', action='store_true')
 parser.add_argument('--distributed', action='store_true')
 parser.add_argument('--port', default='1234')
 parser.add_argument('--seed', default='0')
+parser.add_argument('--backbone', default='r2plus1d_18')
 parser.add_argument('--pretext-model-name', default='scratch')
 parser.add_argument('--pretext-model-path', default=None)
 parser.add_argument('--finetune-ckpt-path', default='checkpoints/scratch/')
@@ -48,7 +49,7 @@ def get_model( cfg, eval_dir, args, logger):
 
     ckp_manager = eval_utils.CheckpointManager(eval_dir, rank=args.gpu)
 
-    model = load_backbone("r2plus1d_18", args.pretext_model_name,args.pretext_model_path)
+    model = load_backbone(args.backbone, args.pretext_model_name,args.pretext_model_path)
 
     return model, ckp_manager
 

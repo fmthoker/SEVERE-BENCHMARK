@@ -17,3 +17,4 @@ from .gym_set_UB_S1 import GYM_set_UB_S1
 from .gym_288 import GYM288
 from .something import SOMETHING
 from .ntu60 import NTU
+from .diving import DIVING

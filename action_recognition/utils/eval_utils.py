@@ -118,6 +118,8 @@ def build_dataloader(db_cfg, split_cfg, fold, num_workers, distributed):
         dataset = datasets.GYM_set_FX_S1
     elif db_cfg['name'] == 'gym_set_ub_s1':
         dataset = datasets.GYM_set_UB_S1
+    elif db_cfg['name'] == 'diving48':
+        dataset = datasets.DIVING
     else:
         raise ValueError('Unknown dataset')
 

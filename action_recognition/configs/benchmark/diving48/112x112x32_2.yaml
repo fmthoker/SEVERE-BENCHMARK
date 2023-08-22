@@ -1,5 +1,5 @@
 required_devices: 8
-resume: false
+resume: true
 
 no_test: false
 test_only: false
@@ -10,10 +10,10 @@ test_freq: 5
 num_workers: 16
 
 benchmark:
-  name: "gym_set-full_finetune_FX_S1_112X112x32"
+  name: "diving-full_finetune_112X112x32_2"
 
 dataset:
-  name: "gym_set_fx_s1"
+  name: "diving48"
   fold: 1
   batch_size: 32
   clip_duration: 2.0
@@ -35,7 +35,7 @@ dataset:
   test:
     split: "testlist{fold:02d}"
     mode: "clip"
-    clips_per_video: 5
+    clips_per_video: 3
     use_augmentation: false
     use_shuffle: false
     drop_last: false
@@ -49,16 +49,16 @@ dataset:
 
 optimizer:
   name: "adam"
-  num_epochs: 18
+  num_epochs: 16
   weight_decay: 0.0
   warmup_classifier: false
   lr:
     name: "multistep"
     base_lr: 0.0001
     gamma: 0.3
-    milestones: [7, 12, 16]
+    milestones: [6, 10, 14]
 
 model:
   args:
-    n_classes: 11
+    n_classes: 48
     feat_dim: 512
