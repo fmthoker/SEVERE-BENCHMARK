@@ -109,7 +109,9 @@ The expected directory hierarchy is as follow:-->
   
  To evaluate [Tubelet Contrast](https://arxiv.org/abs/2303.11003) pretrained models use following training scripts:  
 *[scripts_domain_shift/scripts_tubelet_contrast/](scripts_domain_shift/scripts_tubelet_contrast/)
+
 *[scripts_sample_sizes/scripts_tubelet_contrast/](scripts_sample_sizes/scripts_tubelet_contrast/)
+
 *[scripts_finegym_actions/scripts_tubelet_contrast/](scripts_finegym_actions/scripts_tubelet_contrast/)
 
 ## Experiments
