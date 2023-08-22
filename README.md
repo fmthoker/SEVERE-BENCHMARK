@@ -1,7 +1,7 @@
 # SEVERE Benchmark
 
 ## 📰 News
-**[2023.8.22]** Code and pre-trained models of [Tubelet Contrast](https://arxiv.org/abs/2303.11003) will be released! Keep a look at this [repo](https://github.com/fmthoker/tubelet-contrast)!<br>
+**[2023.8.22]** Code and pre-trained models of [Tubelet Contrast](https://arxiv.org/abs/2303.11003) will be released soon! Keep a look at this [repo](https://github.com/fmthoker/tubelet-contrast)!<br>
 **[2023.8.22]** Evaluation of [Tubelet Contrast](https://arxiv.org/abs/2303.11003) is added this repo. 🎉<br>
 **[2023.7.13]** Our [Tubelet Contrast](https://arxiv.org/abs/2303.11003) is accepted by **ICCV 2023**! 🎉<br>
 
