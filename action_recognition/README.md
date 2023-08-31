@@ -38,7 +38,9 @@ We run our experiments on Python 3.7 and PyTorch 1.6. Other versions should work
 The datasets can be downloaded from the following links:
 
 * [UCF101 ](http://crcv.ucf.edu/data/UCF101.php)
+* [HMDB51](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/)
 * [Something_something_v2](https://developer.qualcomm.com/software/ai-datasets/something-something)
+* [Diving48](http://www.svcl.ucsd.edu/projects/resound/dataset.html)
 * [NTU-60](https://rose1.ntu.edu.sg/dataset/actionRecognition/)
 * For [Fine-Gym v_1.0](https://sdolivia.github.io/FineGym/) please send a request to Fine-Gym authors via [Form](https://docs.google.com/forms/d/e/1FAIpQLScg8KDmBl0oKc7FbBedT0UJJHxpBHQmgsKpc4nWo4dwdVJi0A/viewform) to get access to the dataset. After downloading the videos, follow  the script provided in [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) to trim the videos to subactions. (Note, if you also dowload the videos via [mmaction2](https://github.com/open-mmlab/mmaction2/blob/master/tools/data/gym/README.md) script some of the video will be  missing because of the broken youtube links, so we suggest to request the Fine-Gym authors to get access to whole dataset). Please contact us in case of any issues or if you need preprocessed the Fine-Gym videos. 
 
