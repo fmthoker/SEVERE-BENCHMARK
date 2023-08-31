@@ -58,6 +58,14 @@ The expected directory hierarchy is as follow:-->
 │   │       ├── ApplyEyeMakeup
 │   │       │   └── *.avi
 │   │       └── ...
+│   ├──hmdb51
+│   │   ├── splits
+│   │   │   ├── *.txt
+│   │   │   └── ...
+│   │   └── videos
+│   │       ├── brush_hair
+│   │       │   └── *.avi
+│   │       └── ...
 │   ├──gym
 │   │   ├── annotations
 │   │   │   ├── gym99_train.txt
@@ -78,6 +86,14 @@ The expected directory hierarchy is as follow:-->
 │   │   │       
 │   │   └── something-something-v2-videos_avi
 │   │       └── *.avi
+│   ├──diving48
+│   │   ├── labels
+│   │   │   ├── Diving48_V2_train.json
+│   │   │   ├── Diving48_V2_test.json 
+│   │   │   ├── Diving48_vocab.json
+│   │   └── videos
+│   │       ├── *.avi
+│   │       └── ...
 │   │          
 │   ├──ntu60
 │   │   ├── ntu_60_cross_subject_TrainTestlist
